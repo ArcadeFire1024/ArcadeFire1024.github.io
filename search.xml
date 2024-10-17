@@ -1,36 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>ROS2简介</title>
-    <url>/posts/41aa5bda/</url>
-    <content><![CDATA[<p><strong>ROS2</strong>（Robot Operating System 2）是一个用于机器人和自动化系统开发的开源软件平台。从名字可以看出，它是 <a href="https://getiot.tech/ros/ros-intro">ROS</a> 的下一代版本，目标是利用 ROS1 的优点，改进不足之处，提供一个更加稳定、可靠和可扩展的平台，满足越来越复杂和多样化的机器人应用场景。</p>
-<h2 id="功能特点"><a href="#功能特点" class="headerlink" title="功能特点"></a>功能特点<a href="https://getiot.tech/ros2/ros2-intro/#%E5%8A%9F%E8%83%BD%E7%89%B9%E7%82%B9"></a></h2><p>相较于 ROS，ROS2 具有以下特点：</p>
-<ul>
-<li><strong>更好的可移植性</strong>。ROS2 可以在不同的操作系统和处理器架构上运行，例如 Linux、Windows、macOS 等操作系统，amd64、arm64 等处理器，以满足不同用户的需求。</li>
-<li><strong>更加稳定和可靠</strong>。ROS2 在设计时考虑了一些 ROS 中存在的问题，例如通信的可靠性、多线程支持等，以提供更加稳定和可靠的运行环境。</li>
-<li><strong>更加灵活的通信机制</strong>。ROS2 引入了 DDS（Data Distribution Service）作为通信机制，它支持更多的消息传输模式，例如点对点、多播、组播等，以满足不同的应用场景。</li>
-<li><strong>更好的安全性</strong>。ROS2 提供了更加完善的安全机制，例如支持加密通信、用户身份验证等，以保护机器人系统的安全。</li>
-<li><strong>更加开放和可扩展</strong>。ROS2 的设计更加开放，可以方便地添加新的功能和扩展，例如支持其他语言、提供更多的驱动程序等。</li>
-</ul>
-<p>此外，为了支持机器人系统的开发和测试，ROS2 还提供了丰富的功能和工具，例如消息传输、参数服务器、时间同步、调试工具等。</p>
-]]></content>
-      <categories>
-        <category>ROS2</category>
-      </categories>
-      <tags>
-        <tag>ROS2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>这是我的第一篇博客</title>
-    <url>/posts/72f16dec/</url>
-    <content><![CDATA[<p>欢迎来到我的个人博客，这里会记录我的学习内容和研究生生活</p>
-]]></content>
-      <categories>
-        <category>???</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Yolo各代模型调研及比对</title>
     <url>/posts/a5371350/</url>
     <content><![CDATA[<h2 id="调研背景"><a href="#调研背景" class="headerlink" title="调研背景"></a>调研背景</h2><p>Yolo模型由Ultralytics公司开发，该公司已经为Yolo模型创建了详细的使用和配置网站，因此直接通过访问官网，便可得到最为准确详细且最具有时效性的资料。结合我们无人机项目的具体需求，我的调查重心主要集中在v5，v8，v9，v11这几个大版本号上</p>
@@ -49,7 +19,7 @@
 </li>
 <li><p>mAP(Mean Average Precision): 模型的平均精度，数值越高，表示检测精度越好。</p>
 </li>
-<li><p>Speed CPU ONNX：在标准化的CPU 上运行时的推理速度（毫秒），数值越低，表示推理速度越快。如，值为 73.6 ms，表示该模型在 CPU 上处理一张图片需要约 73.6 毫秒。<strong>主要用于在低算力设备上部署的指标评估。</strong>其中，ONNX(<strong>Open Neural Network Exchange</strong>)是用于不同平台模型转化的一个中间媒介，使模型可以更轻松地在不同环境和硬件上运行，如从Pytorch到TensorFlow。</p>
+<li><p>Speed CPU ONNX：在标准化的CPU 上运行时的推理速度（毫秒），数值越低，表示推理速度越快。如，值为 73.6 ms，表示该模型在 CPU 上处理一张图片需要约 73.6 毫秒。<strong>主要用于在低算力设备上部署的指标评估。</strong>其中，ONNX(<strong>Open Neural Network Exchange</strong>)是用于不同平台模型转化的一个中间模型，使模型可以更轻松地在不同环境和硬件上运行，如从Pytorch到TensorFlow。</p>
 </li>
 <li><p>Speed A100 TensorRT: 在A100上使用 TensorRT 进行推理时的速度（毫秒），同样是越低越好。<strong>适合高算力设备的评估标准，尤其是在服务器端或高性能 GPU 上运行的应用场景中。</strong> TensorRT是<strong>NVIDIA</strong>推出的一个深度学习推理优化器，用于在<strong>GPU</strong>上高效地运行训练好的深度学习模型。</p>
 </li>
@@ -664,5 +634,35 @@
       <tags>
         <tag>docker</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>ROS2简介</title>
+    <url>/posts/41aa5bda/</url>
+    <content><![CDATA[<p><strong>ROS2</strong>（Robot Operating System 2）是一个用于机器人和自动化系统开发的开源软件平台。从名字可以看出，它是 <a href="https://getiot.tech/ros/ros-intro">ROS</a> 的下一代版本，目标是利用 ROS1 的优点，改进不足之处，提供一个更加稳定、可靠和可扩展的平台，满足越来越复杂和多样化的机器人应用场景。</p>
+<h2 id="功能特点"><a href="#功能特点" class="headerlink" title="功能特点"></a>功能特点<a href="https://getiot.tech/ros2/ros2-intro/#%E5%8A%9F%E8%83%BD%E7%89%B9%E7%82%B9"></a></h2><p>相较于 ROS，ROS2 具有以下特点：</p>
+<ul>
+<li><strong>更好的可移植性</strong>。ROS2 可以在不同的操作系统和处理器架构上运行，例如 Linux、Windows、macOS 等操作系统，amd64、arm64 等处理器，以满足不同用户的需求。</li>
+<li><strong>更加稳定和可靠</strong>。ROS2 在设计时考虑了一些 ROS 中存在的问题，例如通信的可靠性、多线程支持等，以提供更加稳定和可靠的运行环境。</li>
+<li><strong>更加灵活的通信机制</strong>。ROS2 引入了 DDS（Data Distribution Service）作为通信机制，它支持更多的消息传输模式，例如点对点、多播、组播等，以满足不同的应用场景。</li>
+<li><strong>更好的安全性</strong>。ROS2 提供了更加完善的安全机制，例如支持加密通信、用户身份验证等，以保护机器人系统的安全。</li>
+<li><strong>更加开放和可扩展</strong>。ROS2 的设计更加开放，可以方便地添加新的功能和扩展，例如支持其他语言、提供更多的驱动程序等。</li>
+</ul>
+<p>此外，为了支持机器人系统的开发和测试，ROS2 还提供了丰富的功能和工具，例如消息传输、参数服务器、时间同步、调试工具等。</p>
+]]></content>
+      <categories>
+        <category>ROS2</category>
+      </categories>
+      <tags>
+        <tag>ROS2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>这是我的第一篇博客</title>
+    <url>/posts/72f16dec/</url>
+    <content><![CDATA[<p>欢迎来到我的个人博客，这里会记录我的学习内容和研究生生活</p>
+]]></content>
+      <categories>
+        <category>???</category>
+      </categories>
   </entry>
 </search>
