@@ -1,6 +1,443 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Yolo各代模型调研及比对</title>
+    <url>/posts/a5371350/</url>
+    <content><![CDATA[<h1 id="Yolo各代模型调研及比对"><a href="#Yolo各代模型调研及比对" class="headerlink" title="Yolo各代模型调研及比对"></a>Yolo各代模型调研及比对</h1><h2 id="调研背景"><a href="#调研背景" class="headerlink" title="调研背景"></a>调研背景</h2><p>Yolo模型由Ultralytics公司开发，该公司已经为Yolo模型创建了详细的使用和配置网站，因此直接通过访问官网，便可得到最为准确详细且最具有时效性的资料。结合我们无人机项目的具体需求，我的调查重心主要集中在v5，v8，v9，v11这几个大版本号上</p>
+<h2 id="Yolo模型分类标准"><a href="#Yolo模型分类标准" class="headerlink" title="Yolo模型分类标准"></a>Yolo模型分类标准</h2><p>Ultralytics公司开发的各个版本的原始Yolo模型都使用了统一的规模分类标准：</p>
+<ul>
+<li>YOLOv?n（nano）：最小的模型，参数最少，适合对速度要求极高且算力有限的设备，如移动设备和嵌入式设备</li>
+<li>YOLOv?s（small）：稍大一些的模型，在保持高速度的同时，检测精度有所提升，适合实时性要求高的任务。</li>
+<li>YOLOv?m（medium）：中等规模的模型，适合在保持较高精度的同时对速度有一定要求的场景。</li>
+<li>YOLOv?l（large) ：更大的模型，参数数量和计算量更大，适合需要高精度的检测任务。</li>
+<li>YOLOv?x（extra large）最更大的模型，参数数量和计算量更大，适合需要极高精度的检测任务。</li>
+</ul>
+<p>不同规模的模型对设备的配置要求截然不同，因此我们不仅要考虑模型的性能，还要考虑其在我们项目的低配置设备（嵌入式无人机系统）上运行的可行性</p>
+<h2 id="Yolo模型性能评价标准"><a href="#Yolo模型性能评价标准" class="headerlink" title="Yolo模型性能评价标准"></a>Yolo模型性能评价标准</h2><p>Ultralytics公司在官网中对标准模型使用了以下参数进行性能评价的标准:</p>
+<ul>
+<li><p>size: 表示输入图像的分辨率大小，是模型在训练和推理时使用的图像尺寸。例如，640 表示输入图像被调整为 640×640 像素的分辨率。分辨率小，推理速度更快；分辨率大，检测精度更高</p>
+</li>
+<li><p>mAP(Mean Average Precision): 模型的平均精度，数值越高，表示检测精度越好。</p>
+</li>
+<li><p>Speed CPU ONNX：在标准化的CPU 上运行时的推理速度（毫秒），数值越低，表示推理速度越快。如，值为 73.6 ms，表示该模型在 CPU 上处理一张图片需要约 73.6 毫秒。<strong>主要用于在低算力设备上部署的指标评估。</strong>其中，ONNX(<strong>Open Neural Network Exchange</strong>)是用于不同平台模型转化的一个中间媒介，使模型可以更轻松地在不同环境和硬件上运行，如从Pytorch到TensorFlow。</p>
+</li>
+<li><p>Speed A100 TensorRT: 在A100上使用 TensorRT 进行推理时的速度（毫秒），同样是越低越好。<strong>适合高算力设备的评估标准，尤其是在服务器端或高性能 GPU 上运行的应用场景中。</strong> TensorRT是<strong>NVIDIA</strong>推出的一个深度学习推理优化器，用于在<strong>GPU</strong>上高效地运行训练好的深度学习模型。</p>
+</li>
+<li><p>Params (M)：模型的参数数量（以百万为单位），数值越高，表示模型的规模越大。<strong>参数较少的模型通常推理速度更快、内存占用更小，适合嵌入式或移动设备的部署。</strong></p>
+</li>
+<li><p>FLOPs (B)：浮点运算次数（以十亿为单位），表示模型的计算复杂度，数值越低，计算量越小。<strong>低 FLOPs 的模型更适合在算力有限的设备上运行。</strong></p>
+</li>
+</ul>
+<p>本次模型的评估数据，都是建立在同一个<strong>COCO(Common Objects in Context)数据集</strong>基础上的，这是一个大规模的对象检测、分割和字幕数据集，通常用于计算机视觉模型的基准测试。</p>
+<h2 id="Yolov5性能参考"><a href="#Yolov5性能参考" class="headerlink" title="Yolov5性能参考"></a>Yolov5性能参考</h2><p>对于Yolov5,官网并没有给出原生标准模型的数据，而是提供了Yolov5u系列的数据，此版本集成了在YOLOv8模型中引入的无锚、无对象分割头功能，完善了模型的架构，从而提高了目标检测任务的准确性与速度权衡。下面给出这个版本的性能参考:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>YAML</th>
+<th>size (pixels)</th>
+<th>mAP val 50-95</th>
+<th>Speed CPU ONNX (ms)</th>
+<th>Speed A100 TensorRT (ms)</th>
+<th>params (M)</th>
+<th>FLOPs (B)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>yolov5nu.pt</td>
+<td>yolov5n.yaml</td>
+<td>640</td>
+<td>34.3</td>
+<td>73.6</td>
+<td>1.06</td>
+<td>2.6</td>
+<td>7.7</td>
+</tr>
+<tr>
+<td>yolov5su.pt</td>
+<td>yolov5s.yaml</td>
+<td>640</td>
+<td>43.0</td>
+<td>120.7</td>
+<td>1.27</td>
+<td>9.1</td>
+<td>24.0</td>
+</tr>
+<tr>
+<td>yolov5mu.pt</td>
+<td>yolov5m.yaml</td>
+<td>640</td>
+<td>49.0</td>
+<td>233.9</td>
+<td>1.86</td>
+<td>25.1</td>
+<td>64.2</td>
+</tr>
+<tr>
+<td>yolov5lu.pt</td>
+<td>yolov5l.yaml</td>
+<td>640</td>
+<td>52.2</td>
+<td>408.4</td>
+<td>2.50</td>
+<td>53.2</td>
+<td>135.0</td>
+</tr>
+<tr>
+<td>yolov5xu.pt</td>
+<td>yolov5x.yaml</td>
+<td>640</td>
+<td>53.2</td>
+<td>763.2</td>
+<td>3.81</td>
+<td>97.2</td>
+<td>246.4</td>
+</tr>
+<tr>
+<td>yolov5n6u.pt</td>
+<td>yolov5n6.yaml</td>
+<td>1280</td>
+<td>42.1</td>
+<td>211.0</td>
+<td>1.83</td>
+<td>4.3</td>
+<td>7.8</td>
+</tr>
+<tr>
+<td>yolov5s6u.pt</td>
+<td>yolov5s6.yaml</td>
+<td>1280</td>
+<td>48.6</td>
+<td>422.6</td>
+<td>2.34</td>
+<td>15.3</td>
+<td>24.6</td>
+</tr>
+<tr>
+<td>yolov5m6u.pt</td>
+<td>yolov5m6.yaml</td>
+<td>1280</td>
+<td>53.6</td>
+<td>810.9</td>
+<td>4.36</td>
+<td>41.2</td>
+<td>65.7</td>
+</tr>
+<tr>
+<td>yolov5l6u.pt</td>
+<td>yolov5l6.yaml</td>
+<td>1280</td>
+<td>55.7</td>
+<td>1470.9</td>
+<td>5.47</td>
+<td>86.1</td>
+<td>137.4</td>
+</tr>
+<tr>
+<td>yolov5x6u.pt</td>
+<td>yolov5x6.yaml</td>
+<td>1280</td>
+<td>56.8</td>
+<td>2436.5</td>
+<td>8.98</td>
+<td>155.4</td>
+<td>250.7</td>
+</tr>
+<tr>
+<td>可以看到nu模型和su模型准确率过低，不太适合我们的场景需求。而增长到lu和xu，准确率提升并不明显的同时时间开销还大了很多，<strong>但因为本项目使用场景的特殊性我认为准确度还是要尽可能高。</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>同时，后缀带有6的版本使用的是尺寸比原始模型的更大图片进行训练与预测得到的结果，可以看到准确度确实有了显著提升，但是伴随而来的时间开销增长也非常大，甚至可能达到了可能无法接受的程度（2.5s）</p>
+<h2 id="Yolov8"><a href="#Yolov8" class="headerlink" title="Yolov8"></a>Yolov8</h2><p>Yolov8系列官方提供了各种细化版本的模型以满足各种需求，如实例分割、姿势&#x2F;关键点检测、定向对象检测和分类，它的特点在介绍v5u时已提到过。无人机主要完成目标检测，因此这里只讨论最基本的模型:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>size (pixels)</th>
+<th>mAP val 50-95</th>
+<th>Speed CPU ONNX (ms)</th>
+<th>Speed A100 TensorRT (ms)</th>
+<th>params (M)</th>
+<th>FLOPs (B)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>YOLOv8n</td>
+<td>640</td>
+<td>37.3</td>
+<td>80.4</td>
+<td>0.99</td>
+<td>3.2</td>
+<td>8.7</td>
+</tr>
+<tr>
+<td>YOLOv8s</td>
+<td>640</td>
+<td>44.9</td>
+<td>128.4</td>
+<td>1.20</td>
+<td>11.2</td>
+<td>28.6</td>
+</tr>
+<tr>
+<td>YOLOv8m</td>
+<td>640</td>
+<td>50.2</td>
+<td>234.7</td>
+<td>1.83</td>
+<td>25.9</td>
+<td>78.9</td>
+</tr>
+<tr>
+<td>YOLOv8l</td>
+<td>640</td>
+<td>52.9</td>
+<td>375.2</td>
+<td>2.39</td>
+<td>43.7</td>
+<td>165.2</td>
+</tr>
+<tr>
+<td>YOLOv8x</td>
+<td>640</td>
+<td>53.9</td>
+<td>479.1</td>
+<td>3.53</td>
+<td>68.2</td>
+<td>257.8</td>
+</tr>
+<tr>
+<td>与YOLOv5相比性能相差不大，准确度有不少提升。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="Yolov9"><a href="#Yolov9" class="headerlink" title="Yolov9"></a>Yolov9</h2><p>YOLOv9在Yolov5代码库的基础上引入了可编程梯度信息 (PGI) 和通用高效层聚合网络(GELAN)等突破性技术，<strong>根据官网的描述，这些技术确保了即使使用精简的模型，也能保留并有效利用准确目标检测所需的基本信息。</strong>针对我们的项目背景此项突破意义较为重大。在效率、准确性和适应性方面表现出显著的改进:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>size (pixels)</th>
+<th>mAP val 50-95</th>
+<th>mAP val 50</th>
+<th>params (M)</th>
+<th>FLOPs (B)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>YOLOv9t</td>
+<td>640</td>
+<td>38.3</td>
+<td>53.1</td>
+<td>2.0</td>
+<td>7.7</td>
+</tr>
+<tr>
+<td>YOLOv9s</td>
+<td>640</td>
+<td>46.8</td>
+<td>63.4</td>
+<td>7.2</td>
+<td>26.7</td>
+</tr>
+<tr>
+<td>YOLOv9m</td>
+<td>640</td>
+<td>51.4</td>
+<td>68.1</td>
+<td>20.1</td>
+<td>76.8</td>
+</tr>
+<tr>
+<td>YOLOv9c</td>
+<td>640</td>
+<td>53.0</td>
+<td>70.2</td>
+<td>25.5</td>
+<td>102.8</td>
+</tr>
+<tr>
+<td>YOLOv9e</td>
+<td>640</td>
+<td>55.6</td>
+<td>72.8</td>
+<td>58.1</td>
+<td>192.5</td>
+</tr>
+<tr>
+<td>注：v9虽然命名规则不太一样，但是依然是根据模型从小到大进行分类</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>可以看到v9确实在精简少了参数量的情况下依然让准确度取得了显著提高。<strong>但是并没有在官网中获取到运行时间相关的数据，对设备的配置要求存疑。</strong></p>
+<h2 id="Yolov11"><a href="#Yolov11" class="headerlink" title="Yolov11"></a>Yolov11</h2><p>YOLOv11是YOLO系列实时物体检测器的最新版本，不仅增强了特征提取能力，而且在使用的参数比YOLOv8少的情况下不影响精度的情况并且提高计算效率:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>size (pixels)</th>
+<th>mAP val 50-95</th>
+<th>Speed CPU ONNX (ms)</th>
+<th>Speed T4 TensorRT10 (ms)</th>
+<th>params (M)</th>
+<th>FLOPs (B)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>YOLO11n</td>
+<td>640</td>
+<td>39.5</td>
+<td>56.1 ± 0.8</td>
+<td>1.5 ± 0.0</td>
+<td>2.6</td>
+<td>6.5</td>
+</tr>
+<tr>
+<td>YOLO11s</td>
+<td>640</td>
+<td>47.0</td>
+<td>90.0 ± 1.2</td>
+<td>2.5 ± 0.0</td>
+<td>9.4</td>
+<td>21.5</td>
+</tr>
+<tr>
+<td>YOLO11m</td>
+<td>640</td>
+<td>51.5</td>
+<td>183.2 ± 2.0</td>
+<td>4.7 ± 0.1</td>
+<td>20.1</td>
+<td>68.0</td>
+</tr>
+<tr>
+<td>YOLO11l</td>
+<td>640</td>
+<td>53.4</td>
+<td>238.6 ± 1.4</td>
+<td>6.2 ± 0.1</td>
+<td>25.3</td>
+<td>86.9</td>
+</tr>
+<tr>
+<td>YOLO11x</td>
+<td>640</td>
+<td>54.7</td>
+<td>462.8 ± 6.7</td>
+<td>11.3 ± 0.2</td>
+<td>56.9</td>
+<td>194.9</td>
+</tr>
+</tbody></table>
+<h2 id="同规模模型不同版本性能比较"><a href="#同规模模型不同版本性能比较" class="headerlink" title="同规模模型不同版本性能比较"></a>同规模模型不同版本性能比较</h2><p>v9因为参数的特殊性不参与比较，并且舍去了一些对项目没有意义的参数（如高性能显卡上运行速度）</p>
+<p>| Model         | size (pixels) | mAP val 50-95 | Speed CPU ONNX (ms) |  params (M) | FLOPs (B) |<br>|—————|—————-|—————|—————|———————-|————————–|————|———–|<br>| yolov5nu.pt   | 640           | 34.3          | 73.6                 |  2.6        | 7.7       |<br>| yolov5n6u.pt  | 1280          | 42.1          | 211.0                |  4.3        | 7.8       |<br>| YOLOv8n | 640           | 37.3          | 80.4                 |  3.2        | 8.7       |<br>| YOLO11n  | 640           | 39.5          | 56.1 ± 0.8          |  2.6        | 6.5       |<br>若选择微模型，v5n6的准确度是最高的，但开销较大，综合考虑准确度和开销的话v11是最合适的</p>
+<p>| Model         | size (pixels) | mAP val 50-95 | Speed CPU ONNX (ms) | params (M) | FLOPs (B) |<br>|—————|—————-|—————|—————|———————-|————————–|————|———–|<br>| yolov5su.pt   |  640           | 43.0          | 120.7                |  9.1        | 24.0      |<br>| yolov5s6u.pt  |1280          | 48.6          | 422.6                |  15.3       | 24.6      |<br>| YOLOv8s | 640           | 44.9          | 128.4                | 11.2       | 28.6      |<br>| YOLO11s  | 640           | 47.0          | 90.0 ± 1.2          |  9.4        | 21.5      |<br>若选择小模型，v56s的准确度是最高的，但开销较大，而v11在开销大幅度降低的情况下做到了类似的相似度，考虑综合情况选择v11较为合适</p>
+<p>| Model         | size (pixels) | mAP val 50-95 | Speed CPU ONNX (ms) |  params (M) | FLOPs (B) |<br>|—————|—————-|—————|—————|———————-|————————–|————|———–|<br>| yolov5mu.pt   |640           | 49.0          | 233.9                |  25.1       | 64.2      |<br>| yolov5m6u.pt  |1280          | 53.6          | 810.9                |  41.2       | 65.7      |<br>| YOLOv8m | 640           | 50.2          | 234.7                |  25.9       | 78.9      |<br>| YOLO11m  | 640           | 51.5          | 183.2 ± 2.0         |  20.1       | 68.0      |<br>若选择中等模型，v56s的准确度是最高的，但开销较大，而v11在开销大幅度降低的情况下做到了类似的相似度，考虑综合情况选择v11较为合适</p>
+<p>| Model         | size (pixels) | mAP val 50-95 | Speed CPU ONNX (ms) | params (M) | FLOPs (B) |<br>|—————|—————-|—————|—————|———————-|————————–|————|———–|<br>| yolov5lu.pt   |640           | 52.2          | 408.4                |  53.2       | 135.0     |<br>| yolov5l6u.pt  | 1280          | 55.7          | 1470.9               |  86.1       | 137.4     |<br>| YOLOv8l | 640           | 52.9          | 375.2                |  43.7       | 165.2     |<br>| YOLO11l  | 640           | 53.4          | 238.6 ± 1.4         |  25.3       | 86.9      |<br>若选择大模型，v56s的准确度是最高的，但开销较大，而v11在开销大幅度降低的情况下做到了类似的相似度，考虑综合情况选择v11较为合适</p>
+<p>| Model         | size (pixels) | mAP val 50-95 | Speed CPU ONNX (ms) |  params (M) | FLOPs (B) |<br>|—————|—————-|—————|—————|———————-|————————–|————|———–|<br>| yolov5xu.pt   |640           | 53.2          | 763.2                | 97.2       | 246.4     |<br>| yolov5x6u.pt  |1280          | 56.8          | 2436.5               |  155.4      | 250.7     |<br>| YOLOv8x | 640           | 53.9          | 479.1                |  68.2       | 257.8     |<br>| YOLO11x  | 640           | 54.7          | 462.8 ± 6.7         |  56.9       | 194.9     |<br>若选择极大模型，v56s的准确度是最高的，但开销较大，而v11在开销大幅度降低的情况下做到了类似的相似度，考虑综合情况选择v11较为合适</p>
+<p>综上所述，如果想要追求<strong>极致的准确度</strong>应该使用v56u模型，如果血药综合考虑准确度和性能，则应该使用v11</p>
+<h2 id="参考网站"><a href="#参考网站" class="headerlink" title="参考网站"></a>参考网站</h2><ol>
+<li><strong>yolov5:</strong> <a href="https://docs.ultralytics.com/zh/models/yolov5/">https://docs.ultralytics.com/zh/models/yolov5/</a></li>
+<li><strong>yolov8:</strong> <a href="https://docs.ultralytics.com/zh/models/yolov8/">https://docs.ultralytics.com/zh/models/yolov8/</a></li>
+<li><strong>yolov9</strong>: <a href="https://docs.ultralytics.com/zh/models/yolov9/">https://docs.ultralytics.com/zh/models/yolov9/</a></li>
+<li><strong>yolov11</strong>: <a href="https://docs.ultralytics.com/zh/models/yolo11/">https://docs.ultralytics.com/zh/models/yolo11/</a></li>
+<li><strong>mAP定义</strong>: <a href="https://blog.csdn.net/qq_40765537/article/details/106394103">https://blog.csdn.net/qq_40765537/article/details/106394103</a></li>
+<li><strong>ONNX定义</strong>: <a href="https://blog.csdn.net/gaoxueyi551/article/details/117331600">https://blog.csdn.net/gaoxueyi551/article/details/117331600</a></li>
+<li><strong>TensorRT</strong>: <a href="https://blog.csdn.net/weixin_45277161/article/details/136566919">https://blog.csdn.net/weixin_45277161/article/details/136566919</a></li>
+<li><strong>COCO数据集</strong>: <a href="https://docs.ultralytics.com/datasets/detect/coco/">https://docs.ultralytics.com/datasets/detect/coco/</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>无人机项目</category>
+      </categories>
+      <tags>
+        <tag>yolo cv</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker基础知识</title>
+    <url>/posts/7b36b89c/</url>
+    <content><![CDATA[<h3>docker的基本概念</h3>
+
+
+<ul>
+<li><strong>镜像（Image）</strong>：Docker 镜像（Image），就相当于是一个 root 文件系统。</li>
+<li><strong>容器（Container）</strong>：镜像（Image）和容器（Container）的关系，就像是面向对象程序设计中的类和实例一样，镜像是静态的定义，容器是镜像运行时的实体。容器可以被创建、启动、停止、删除、暂停等。</li>
+<li><strong>仓库（Repository）</strong>：仓库可看成一个代码控制中心，用来保存镜像。</li>
+</ul>
+<h3>docker常用的指令集</h3>
+
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker --version #检查docker当前版本</span><br><span class="line">docker ps #列出正在运行的容器的状态</span><br><span class="line">docker images #列出所有已经安装的镜像</span><br><span class="line">docker run &lt;image&gt; [--name xxx] #运行安装好的镜像,并可以取名为xxx</span><br><span class="line">docker ps -a #列出所有的容器的状态，无论是否在运行</span><br><span class="line">docker stop &lt;container id | container name&gt; #让正在运行的容器停止运行</span><br><span class="line">docker rmi &lt;image&gt; #删除安装的镜像</span><br><span class="line">docker pull #从远程仓库拉取镜像</span><br></pre></td></tr></table></figure>
+
+<p>其中docker run的选项组合尤为丰富，下面详细展开说一说</p>
+<h3>如何让docker容器启动时就自动执行某些指令
+</h3>
+
+<p>比如我希望我的Ubuntu容器在启动后立刻在屏幕中返回”Hello World”,我可以使用下面的指令</p>
+<p><code>docker run ubuntu:15.10 /bin/echo &quot;Hello world&quot;</code></p>
+<p>各个参数解析：</p>
+<ul>
+<li><strong>docker:</strong> Docker 的二进制执行文件。</li>
+<li><strong>run:</strong> 与前面的 docker 组合来运行一个容器。</li>
+<li><strong>ubuntu:15.10</strong> 指定要运行的镜像，Docker 首先从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像。</li>
+<li><strong>&#x2F;bin&#x2F;echo “Hello world”:</strong> 在启动的容器里执行的命令</li>
+</ul>
+<p>以上命令完整的意思可以解释为：Docker 以 ubuntu15.10 镜像创建一个新容器，然后在容器里执行 bin&#x2F;echo “Hello world”，然后输出结果,值得注意的是，这里的”&#x2F;bin&#x2F;echo”是容器里的系统调用而不是本地主机的。</p>
+<h3>如何让docker容器转到后台运行</h3>
+
+
+<p>有时我并不希望容器在我的shell里面执行，因为这样会阻塞我的shell面板让我无法再键入指令，这时就也需要用到-d选项，使其在后台运行，不过docker依然会在shell返回容器的id给我们</p>
+<p><code>docker run -d ubuntu:15.10 /bin/echo &quot;Hello world&quot;</code></p>
+<p>这样我们的shell就不会再打印Hello World，取而代之的是我们容器的id</p>
+<p>如果我们想要获取输出的内容，可以使用<code>docker logs &lt;container id | container name&gt; </code> 进行获取</p>
+<h3>运行交互式的容器</h3>
+我们通过 docker 的两个参数 -i -t，让 docker 运行的容器实现"对话"的能力：
+
+<figure class="highlight docker"><figcaption><span>run -i -t ubuntu:15.10</span><a href="/bin/bash">link</a></figcaption><table><tr><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="language-bash"> -i -t ubuntu:15.10 /bin/bash</span></span><br><span class="line">root@<span class="number">0123</span>ce188bd8:/<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>各个参数解析：</p>
+<p>-t: 在新容器内指定一个伪终端或终端。</p>
+<p>-i: 允许你对容器内的标准输入 (STDIN) 进行交互。</p>
+<p>注意第二行 root@0123ce188bd8:&#x2F;#，此时我们已进入一个 ubuntu15.10 系统的容器</p>
+<p>我们尝试在容器中运行命令 cat &#x2F;proc&#x2F;version和ls分别查看当前系统的版本信息和当前目录下的文件列表</p>
+<figure class="highlight plaintext"><figcaption><span>cat</span><a href="/proc/version">link</a></figcaption><table><tr><td class="code"><pre><span class="line">Linux version 4.4.0-151-generic (buildd@lgw01-amd64-043) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10) ) #178-Ubuntu SMP Tue Jun 11 08:30:22 UTC 2019</span><br><span class="line">root@0123ce188bd8:/# ls</span><br><span class="line">bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br><span class="line">root@0123ce188bd8:/# `</span><br></pre></td></tr></table></figure>
+
+<p>我们可以通过运行 exit 命令或者使用 CTRL+D 来退出容器。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@0123ce188bd8:/#  exit</span><br><span class="line">exit</span><br><span class="line">root@runoob:~# </span><br></pre></td></tr></table></figure>
+
+<p>注意第三行中 <strong>root@runoob:~#</strong> 表明我们已经退出了当前的容器，返回到当前的主机中。</p>
+<h3>歪门邪道</h3>
+
+
+<p>一个个删除不再需要的容器是非常麻烦的，因此docker为用户提供了一条可以删除所有停止运行容器的指令:</p>
+<p><code>docker container prune</code></p>
+<p>当然，在学习docker的过程中想必大家已经创建了很多后台运行的容器，一个一个输入名称进行删除实在太麻烦了，chatgpt提供了一条可以立刻删除所有容器的指令（平常慎用）</p>
+<p><code>docker rm -f $(docker ps -aq)</code></p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ROS2简介</title>
     <url>/posts/41aa5bda/</url>
     <content><![CDATA[<p><strong>ROS2</strong>（Robot Operating System 2）是一个用于机器人和自动化系统开发的开源软件平台。从名字可以看出，它是 <a href="https://getiot.tech/ros/ros-intro">ROS</a> 的下一代版本，目标是利用 ROS1 的优点，改进不足之处，提供一个更加稳定、可靠和可扩展的平台，满足越来越复杂和多样化的机器人应用场景。</p>
@@ -14,6 +451,9 @@
 </ul>
 <p>此外，为了支持机器人系统的开发和测试，ROS2 还提供了丰富的功能和工具，例如消息传输、参数服务器、时间同步、调试工具等。</p>
 ]]></content>
+      <categories>
+        <category>ROS2</category>
+      </categories>
       <tags>
         <tag>ROS2</tag>
       </tags>
@@ -23,5 +463,8 @@
     <url>/posts/72f16dec/</url>
     <content><![CDATA[<p>欢迎来到我的个人博客，这里会记录我的学习内容和研究生生活</p>
 ]]></content>
+      <categories>
+        <category>???</category>
+      </categories>
   </entry>
 </search>
