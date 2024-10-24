@@ -119,12 +119,24 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="准备工作需要的环境: python版本&gt;&#x3D;3.8(最好10以上),pytorch版本&gt;&#x3D;1.8 Conda安装Yolo过程如果没有自己的虚拟环境，建议先使用conda创建一个虚拟环境 conda create --name myenv #myenv换成你想要的环境名 有时在创建环境时指定 Python和Pytorch 版本，可以使用以下命令，建议指定一下否则解释器路">
 <meta property="og:locale">
+<meta property="og:image" content="https://static.zybuluo.com/planeli/usm85109d0pwv17oz57fqllx/image.png">
+<meta property="og:image" content="https://static.zybuluo.com/planeli/0zfgshonlqxihaup82k4hqhw/20241023212313.png">
+<meta property="og:image" content="https://static.zybuluo.com/planeli/drdzcpotj40nt9m4jx296z31/image.png">
+<meta property="og:image" content="https://static.zybuluo.com/planeli/30itfa5tgpxzl2clemwcd7t3/image.png">
+<meta property="og:image" content="https://static.zybuluo.com/planeli/gnv14mwsby66126nl1k90bre/image.png">
+<meta property="og:image" content="https://static.zybuluo.com/planeli/himpsz3vm49bwjk5hh2gimpq/image.png">
+<meta property="og:image" content="https://static.zybuluo.com/planeli/t4y0s19dbwcrnisw33s2469h/4%7BURAR2RR%60%60II84A7W5V5UT.png">
+<meta property="og:image" content="https://static.zybuluo.com/planeli/aoysusg2ywrxdkhcimqnhbsq/FKY2$%29%28992$3U4SN~PVP198.png">
+<meta property="og:image" content="https://static.zybuluo.com/planeli/i3hqsz8vty5z2ppoe5ekzxom/image.png">
+<meta property="og:image" content="https://static.zybuluo.com/planeli/6li1f8cva4ehuf8q6rium3bz/image.png">
+<meta property="og:image" content="https://static.zybuluo.com/planeli/0dyv7kc6or9pzknycklwi36r/image.png">
 <meta property="article:published_time" content="2024-10-17T04:37:59.000Z">
-<meta property="article:modified_time" content="2024-10-24T08:52:17.970Z">
+<meta property="article:modified_time" content="2024-10-24T10:53:45.539Z">
 <meta property="article:author" content="Continuefly Li">
 <meta property="article:tag" content="yolo">
 <meta property="article:tag" content="cv">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.zybuluo.com/planeli/usm85109d0pwv17oz57fqllx/image.png">
 
 
 
@@ -405,7 +417,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  1.1k
                 </span>
               
 
@@ -421,7 +433,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  4
                 </span>
               
             </div>
@@ -450,122 +462,58 @@
 <p>这是YOLO官方给出的最完整的安装格式,当然,如果你使用的是AMD显卡请不要用这个:</p>
 <p><code>conda install -c pytorch -c nvidia -c conda-forge pytorch torchvision pytorch-cuda=11.8 ultralytics</code></p>
 <p>如果下载速度非常慢甚至无法连接，那么可能需要更换为国内镜像源</p>
-<pre><code class="conda">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/
-conda config --set show_channel_urls yes```
+<figure class="highlight plaintext"><figcaption><span>config --add channels</span><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/">link</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
 
-创建完成后别忘了激活环境
-
-`conda activate myenv`
-
-如果已经处于其他环境中应当先退出
-
-`conda deactivate`
-
-下面就可以正式用conda安装yolo了，只需要一句话，就可以把所有需要的依赖全部安装
-
-`conda install conda-forge::ultralytics`
-
-使用pip也可以起到同样的效果:
-
-`pip install ultralytics`
-
-我们可以通过下面的指令检查依赖是否安装完毕,如果里面有ultralytics说明安装成功
-
-`conda list`
-
-也可以使用python命令行检查，先输入python进入python解释器，然后输入以下代码:
-
-`from ultralytics import YOLO`
-
-如果命令行没报错说明安装成功
-
-## Yolo模型的使用
-
-Yolo可以直接在命令行使用指令进行使用,这是官方给出的一个样例:
-
-`yolo predict model=yolo11n.pt source=&#39;https://ultralytics.com/images/bus.jpg&#39;`
-
-如果不能下载成功可能是网络问题，需要翻墙
-
-我们也可以使用代码的形式来使用yolo模型，下面介绍具体流程，我们首先在硬盘中创建一个名为yolo11的文件，里面就存放我们需要处理的图片:
-
-![image.png-39.3kB][1]
-
-
-在YOLO11的文件里面创建三个子文件夹，一个Annotations-----图片目标检测完存放文件；JPEGlmages-----初始待检测图片存放文件；Models-----YOLO11的模型权重文件存放出文件：
-
-![A0FOB_H34&#123;ANLSY0OMDF`BL.png-35.2kB][2]
-
-首先我们需要先解决权重文件的下载，我们进入官网(https://docs.ultralytics.com/quickstart/#install-ultralytics)点击Models进入模型下载权重文件下载界面:
-
-![20241023212313.png-114.3kB][3]
-
-再点击左侧的yolo11:
-
-![image.png-101.6kB][4]
-
-可以看到这里有五种不同的模型，分别对应五种不同的功能:
-
-![BC]~S9EPE[Q`J9785XN1_72.png-92.3kB][5]
-
-这里我们选择第一个，也就是实现目标检测功能的模型
-
-YOLO11检测模型总共给了我们五个权重文件。各个权重文件精度由小到大，大小由小到大排列，这里我们只进行一个简单的测验，因此使用第一个,点名字即可下载:
-
-![5R3KG2G&#125;O7S3AC6F@C`A``P.png-78.1kB][6]
-
-下载完后把文件放在我们刚才建的models文件夹下
-
-我们需要在yolp11文件夹下创建一个python的文件，命名为为demo.py:
-
-`vi demo.py`
-
-接下来，我们继续打开官网，选择Tasks模块，打开predict。下滑到界面的位置复制代码，粘贴到demo.py当中去：
-
-![image.png-163.9kB][7]
-
-同时我们要对部分代码进行改写:
-
-![image.png-78.2kB][8]
-
-在改写之前我们需要找一些图片例子，先使用我下面提供的图片。另存到JPEGlmages文件夹当中另存为1.png:
-
-![image.png-79.7kB][9]
-
-这个时候我们有测试文件了开始按照我的下面进行更改代码:
-
-![4&#123;URAR2RR``II84A7W5V5UT.png-75.2kB][10]
-
-然后我们输入python demo.py，运行整个程序。可以得到以下标记图片。需要仔细注意标注红框的地方！
-
-出现下面的结果说明预测成功:
-
-![FKY2$)(992$3U4SN~PVP198.png-7.5kB][11]
-
-点击生成的图片查看结果:
-
-![image.png-2536.1kB][12]
-
-代码只需要改变权重文件即可，示例：
-
-![image.png-40.3kB][13]
-
-
-  [1]: https://static.zybuluo.com/planeli/usm85109d0pwv17oz57fqllx/image.png
-  [2]: https://static.zybuluo.com/planeli/xex4w1wmutygxs7jmht8ifry/A0FOB_H34%7BANLSY0OMDF%60BL.png
-  [3]: https://static.zybuluo.com/planeli/0zfgshonlqxihaup82k4hqhw/20241023212313.png
-  [4]: https://static.zybuluo.com/planeli/drdzcpotj40nt9m4jx296z31/image.png
-  [5]: https://static.zybuluo.com/planeli/roogapyx96skg895bt90ujgj/BC%5D~S9EPE%5BQ%60J9785XN1_72.png
-  [6]: https://static.zybuluo.com/planeli/m2m2lz3xbu6ttnnb4bhs09nm/5R3KG2G%7DO7S3AC6F@C%60A%60%60P.png
-  [7]: https://static.zybuluo.com/planeli/30itfa5tgpxzl2clemwcd7t3/image.png
-  [8]: https://static.zybuluo.com/planeli/gnv14mwsby66126nl1k90bre/image.png
-  [9]: https://static.zybuluo.com/planeli/himpsz3vm49bwjk5hh2gimpq/image.png
-  [10]: https://static.zybuluo.com/planeli/t4y0s19dbwcrnisw33s2469h/4%7BURAR2RR%60%60II84A7W5V5UT.png
-  [11]: https://static.zybuluo.com/planeli/aoysusg2ywrxdkhcimqnhbsq/FKY2$%29%28992$3U4SN~PVP198.png
-  [12]: https://static.zybuluo.com/planeli/i3hqsz8vty5z2ppoe5ekzxom/image.png
-  [13]: https://static.zybuluo.com/planeli/6li1f8cva4ehuf8q6rium3bz/image.png
-</code></pre>
+<p>创建完成后别忘了激活环境</p>
+<p><code>conda activate myenv</code></p>
+<p>如果已经处于其他环境中应当先退出</p>
+<p><code>conda deactivate</code></p>
+<p>下面就可以正式用conda安装yolo了，只需要一句话，就可以把所有需要的依赖全部安装</p>
+<p><code>conda install conda-forge::ultralytics</code></p>
+<p>使用pip也可以起到同样的效果:</p>
+<p><code>pip install ultralytics</code></p>
+<p>我们可以通过下面的指令检查依赖是否安装完毕,如果里面有ultralytics说明安装成功</p>
+<p><code>conda list</code></p>
+<p>也可以使用python命令行检查，先输入python进入python解释器，然后输入以下代码:</p>
+<p><code>from ultralytics import YOLO</code></p>
+<p>如果命令行没报错说明安装成功</p>
+<h2 id="Yolo模型的使用"><a href="#Yolo模型的使用" class="headerlink" title="Yolo模型的使用"></a>Yolo模型的使用</h2><p>Yolo可以直接在命令行使用指令进行使用,这是官方给出的一个样例:</p>
+<p><code>yolo predict model=yolo11n.pt source=&#39;https://ultralytics.com/images/bus.jpg&#39;</code></p>
+<p>如果不能下载成功可能是网络问题，需要翻墙</p>
+<p>我们也可以使用代码的形式来使用yolo模型，下面介绍具体流程，我们首先在硬盘中创建一个名为yolo11的文件，里面就存放我们需要处理的图片:</p>
+<p><img src="https://static.zybuluo.com/planeli/usm85109d0pwv17oz57fqllx/image.png" alt="image.png-39.3kB"></p>
+<p>在YOLO11的文件里面创建三个子文件夹，一个Annotations—–图片目标检测完存放文件；JPEGlmages—–初始待检测图片存放文件；Models—–YOLO11的模型权重文件存放出文件：</p>
+<p>![A0FOB_H34{ANLSY0OMDF&#96;BL.png-35.2kB]<a target="_blank" rel="noopener" href="https://static.zybuluo.com/planeli/xex4w1wmutygxs7jmht8ifry/A0FOB_H34%7BANLSY0OMDF%60BL.png">2</a></p>
+<p>首先我们需要先解决权重文件的下载，我们进入官网(<a target="_blank" rel="noopener" href="https://docs.ultralytics.com/quickstart/#install-ultralytics)%E7%82%B9%E5%87%BBModels%E8%BF%9B%E5%85%A5%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD%E6%9D%83%E9%87%8D%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E7%95%8C%E9%9D%A2">https://docs.ultralytics.com/quickstart/#install-ultralytics)点击Models进入模型下载权重文件下载界面</a>:</p>
+<p><img src="https://static.zybuluo.com/planeli/0zfgshonlqxihaup82k4hqhw/20241023212313.png" alt="20241023212313.png-114.3kB"></p>
+<p>再点击左侧的yolo11:</p>
+<p><img src="https://static.zybuluo.com/planeli/drdzcpotj40nt9m4jx296z31/image.png" alt="image.png-101.6kB"></p>
+<p>可以看到这里有五种不同的模型，分别对应五种不同的功能:</p>
+<p>![BC]~S9EPE[Q&#96;J9785XN1_72.png-92.3kB]<a target="_blank" rel="noopener" href="https://static.zybuluo.com/planeli/roogapyx96skg895bt90ujgj/BC%5D~S9EPE%5BQ%60J9785XN1_72.png">5</a></p>
+<p>这里我们选择第一个，也就是实现目标检测功能的模型</p>
+<p>YOLO11检测模型总共给了我们五个权重文件。各个权重文件精度由小到大，大小由小到大排列，这里我们只进行一个简单的测验，因此使用第一个,点名字即可下载:</p>
+<p>![5R3KG2G}O7S3AC6F@C&#96;A&#96;&#96;P.png-78.1kB]<a target="_blank" rel="noopener" href="https://static.zybuluo.com/planeli/m2m2lz3xbu6ttnnb4bhs09nm/5R3KG2G%7DO7S3AC6F@C%60A%60%60P.png">6</a></p>
+<p>下载完后把文件放在我们刚才建的models文件夹下</p>
+<p>我们需要在yolp11文件夹下创建一个python的文件，命名为为demo.py:</p>
+<p><code>vi demo.py</code></p>
+<p>接下来，我们继续打开官网，选择Tasks模块，打开predict。下滑到界面的位置复制代码，粘贴到demo.py当中去：</p>
+<p><img src="https://static.zybuluo.com/planeli/30itfa5tgpxzl2clemwcd7t3/image.png" alt="image.png-163.9kB"></p>
+<p>同时我们要对部分代码进行改写:</p>
+<p><img src="https://static.zybuluo.com/planeli/gnv14mwsby66126nl1k90bre/image.png" alt="image.png-78.2kB"></p>
+<p>在改写之前我们需要找一些图片例子，先使用我下面提供的图片。另存到JPEGlmages文件夹当中另存为1.png:</p>
+<p><img src="https://static.zybuluo.com/planeli/himpsz3vm49bwjk5hh2gimpq/image.png" alt="image.png-79.7kB"></p>
+<p>这个时候我们有测试文件了开始按照我的下面进行更改代码:</p>
+<p><img src="https://static.zybuluo.com/planeli/t4y0s19dbwcrnisw33s2469h/4%7BURAR2RR%60%60II84A7W5V5UT.png" alt="4{URAR2RR``II84A7W5V5UT.png-75.2kB"></p>
+<p>然后我们输入python demo.py，运行整个程序。可以得到以下标记图片。需要仔细注意标注红框的地方！</p>
+<p>出现下面的结果说明预测成功:</p>
+<p><img src="https://static.zybuluo.com/planeli/aoysusg2ywrxdkhcimqnhbsq/FKY2$%29%28992$3U4SN~PVP198.png" alt="FKY2$)(992$3U4SN~PVP198.png-7.5kB"></p>
+<p>点击生成的图片查看结果:</p>
+<p><img src="https://static.zybuluo.com/planeli/i3hqsz8vty5z2ppoe5ekzxom/image.png" alt="image.png-2536.1kB"></p>
+<p>代码只需要改变权重文件即可，示例：</p>
+<p><img src="https://static.zybuluo.com/planeli/6li1f8cva4ehuf8q6rium3bz/image.png" alt="image.png-40.3kB"></p>
+<p>然后我们输入python demo.py，运行整个程序。可以得到以下标记图片：</p>
+<p><img src="https://static.zybuluo.com/planeli/0dyv7kc6or9pzknycklwi36r/image.png" alt="image.png-1701kB"></p>
+<p>这里的图像分割权重文件相较于检测文件，将检测出来的图像进行了描绘边缘标记，与周围环境分割开了！</p>
 
       
     </div>
@@ -761,7 +709,7 @@ YOLO11检测模型总共给了我们五个权重文件。各个权重文件精�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conda%E5%AE%89%E8%A3%85Yolo%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">Conda安装Yolo过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conda%E5%AE%89%E8%A3%85Yolo%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">Conda安装Yolo过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Yolo%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">Yolo模型的使用</span></a></li></ol></div>
             
 
           </div>
@@ -795,7 +743,7 @@ YOLO11检测模型总共给了我们五个权重文件。各个权重文件精�
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">5.3k</span>
+    <span title="Site words total count">5.2k</span>
   
 </div>
 
