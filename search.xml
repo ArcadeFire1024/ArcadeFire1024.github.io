@@ -1,75 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Yolo模型的使用</title>
-    <url>/posts/1f8eda31/</url>
-    <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>需要的环境: python版本&gt;&#x3D;3.8(最好10以上),pytorch版本&gt;&#x3D;1.8</p>
-<h2 id="Conda安装Yolo过程"><a href="#Conda安装Yolo过程" class="headerlink" title="Conda安装Yolo过程"></a>Conda安装Yolo过程</h2><p>如果没有自己的虚拟环境，建议先使用conda创建一个虚拟环境</p>
-<p><code>conda create --name myenv #myenv换成你想要的环境名</code></p>
-<p>有时在创建环境时指定 Python和Pytorch 版本，可以使用以下命令，建议指定一下否则解释器路径配置可能有问题：</p>
-<p><code>conda create --name myenv python=3.11 pytorch=1.8.0</code></p>
-<p>这是YOLO官方给出的最完整的安装格式,当然,如果你使用的是AMD显卡请不要用这个:</p>
-<p><code>conda install -c pytorch -c nvidia -c conda-forge pytorch torchvision pytorch-cuda=11.8 ultralytics</code></p>
-<p>如果下载速度非常慢甚至无法连接，那么可能需要更换为国内镜像源</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
-
-<p>创建完成后别忘了激活环境</p>
-<p><code>conda activate myenv</code></p>
-<p>如果已经处于其他环境中应当先退出</p>
-<p><code>conda deactivate</code></p>
-<p>下面就可以正式用conda安装yolo了，只需要一句话，就可以把所有需要的依赖全部安装</p>
-<p><code>conda install conda-forge::ultralytics</code></p>
-<p>使用pip也可以起到同样的效果:</p>
-<p><code>pip install ultralytics</code></p>
-<p>我们可以通过下面的指令检查依赖是否安装完毕,如果里面有ultralytics说明安装成功</p>
-<p><code>conda list</code></p>
-<p>也可以使用python命令行检查，先输入python进入python解释器，然后输入以下代码:</p>
-<p><code>from ultralytics import YOLO</code></p>
-<p>如果命令行没报错说明安装成功</p>
-<h2 id="Yolo模型的使用"><a href="#Yolo模型的使用" class="headerlink" title="Yolo模型的使用"></a>Yolo模型的使用</h2><p>Yolo可以直接在命令行使用指令进行使用,这是官方给出的一个样例:</p>
-<p><code>yolo predict model=yolo11n.pt source=&#39;https://ultralytics.com/images/bus.jpg&#39;</code></p>
-<p>如果不能下载成功可能是网络问题，需要翻墙</p>
-<p>我们也可以使用代码的形式来使用yolo模型，下面介绍具体流程，我们首先在硬盘中创建一个名为yolo11的文件，里面就存放我们需要处理的图片:</p>
-<p><img src="/images/1.png" alt="image.png-39.3kB"></p>
-<p>在YOLO11的文件里面创建三个子文件夹，一个Annotations—–图片目标检测完存放文件；JPEGlmages—–初始待检测图片存放文件；Models—–YOLO11的模型权重文件存放出文件：</p>
-<p><img src="/images/2.png" alt="2.png-35.2kB"></p>
-<p>首先我们需要先解决权重文件的下载，我们进入官网(<a href="https://docs.ultralytics.com/quickstart/#install-ultralytics">https://docs.ultralytics.com/quickstart/#install-ultralytics</a>) 点击Models进入模型下载权重文件下载界面:</p>
-<p><img src="/images/3.png" alt="20241023212313.png-114.3kB"></p>
-<p>再点击左侧的yolo11:</p>
-<p><img src="/images/4.png" alt="image.png-101.6kB"></p>
-<p>可以看到这里有五种不同的模型，分别对应五种不同的功能:</p>
-<p><img src="/images/5.png" alt="5.png-92.3kB"></p>
-<p>这里我们选择第一个，也就是实现目标检测功能的模型</p>
-<p>YOLO11检测模型总共给了我们五个权重文件。各个权重文件精度由小到大，大小由小到大排列，这里我们只进行一个简单的测验，因此使用第一个,点名字即可下载:</p>
-<p><img src="/images/6.png" alt="6.png-78.1kB"></p>
-<p>下载完后把文件放在我们刚才建的models文件夹下</p>
-<p>我们需要在yolp11文件夹下创建一个python的文件，命名为为demo.py:</p>
-<p><code>vi demo.py</code></p>
-<p>接下来，我们继续打开官网，选择Tasks模块，打开predict。下滑到界面的位置复制代码，粘贴到demo.py当中去：</p>
-<p><img src="/images/7.png" alt="image.png-163.9kB"></p>
-<p>同时我们要对部分代码进行改写:</p>
-<p><img src="/images/8.png" alt="image.png-78.2kB"></p>
-<p>在改写之前我们需要找一些图片例子，先使用我下面提供的图片。另存到JPEGlmages文件夹当中另存为1.png:</p>
-<p><img src="/images/9.png" alt="image.png-79.7kB"></p>
-<p>这个时候我们有测试文件了开始按照我的下面进行更改代码:</p>
-<p><img src="/images/10.png" alt="4{URAR2RR``II84A7W5V5UT.png-75.2kB"></p>
-<p>然后我们输入python demo.py，运行整个程序。可以得到以下标记图片。需要仔细注意标注红框的地方！</p>
-<p>出现下面的结果说明预测成功:</p>
-<p><img src="/images/11.png" alt="FKY2$)(992$3U4SN~PVP198.png-7.5kB"></p>
-<p>点击生成的图片查看结果:</p>
-<p><img src="/images/12.png" alt="image.png-2536.1kB"></p>
-<p>代码只需要改变权重文件即可，示例：</p>
-<p><img src="/images/13.png" alt="image.png-40.3kB"></p>
-<p>然后我们输入python demo.py，运行整个程序。可以得到以下标记图片：</p>
-<p><img src="/images/14.png" alt="image.png-1701kB"></p>
-<p>这里的图像分割权重文件相较于检测文件，将检测出来的图像进行了描绘边缘标记，与周围环境分割开了！</p>
+    <title>这是我的第一篇博客</title>
+    <url>/posts/72f16dec/</url>
+    <content><![CDATA[<p>欢迎来到我的个人博客，这里会记录我的学习内容和研究生生活</p>
 ]]></content>
       <categories>
-        <category>无人机项目</category>
+        <category>???</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>ROS2简介</title>
+    <url>/posts/41aa5bda/</url>
+    <content><![CDATA[<p><strong>ROS2</strong>（Robot Operating System 2）是一个用于机器人和自动化系统开发的开源软件平台。从名字可以看出，它是 <a href="https://getiot.tech/ros/ros-intro">ROS</a> 的下一代版本，目标是利用 ROS1 的优点，改进不足之处，提供一个更加稳定、可靠和可扩展的平台，满足越来越复杂和多样化的机器人应用场景。</p>
+<h2 id="功能特点"><a href="#功能特点" class="headerlink" title="功能特点"></a>功能特点<a href="https://getiot.tech/ros2/ros2-intro/#%E5%8A%9F%E8%83%BD%E7%89%B9%E7%82%B9"></a></h2><p>相较于 ROS，ROS2 具有以下特点：</p>
+<ul>
+<li><strong>更好的可移植性</strong>。ROS2 可以在不同的操作系统和处理器架构上运行，例如 Linux、Windows、macOS 等操作系统，amd64、arm64 等处理器，以满足不同用户的需求。</li>
+<li><strong>更加稳定和可靠</strong>。ROS2 在设计时考虑了一些 ROS 中存在的问题，例如通信的可靠性、多线程支持等，以提供更加稳定和可靠的运行环境。</li>
+<li><strong>更加灵活的通信机制</strong>。ROS2 引入了 DDS（Data Distribution Service）作为通信机制，它支持更多的消息传输模式，例如点对点、多播、组播等，以满足不同的应用场景。</li>
+<li><strong>更好的安全性</strong>。ROS2 提供了更加完善的安全机制，例如支持加密通信、用户身份验证等，以保护机器人系统的安全。</li>
+<li><strong>更加开放和可扩展</strong>。ROS2 的设计更加开放，可以方便地添加新的功能和扩展，例如支持其他语言、提供更多的驱动程序等。</li>
+</ul>
+<p>此外，为了支持机器人系统的开发和测试，ROS2 还提供了丰富的功能和工具，例如消息传输、参数服务器、时间同步、调试工具等。</p>
+]]></content>
+      <categories>
+        <category>ROS2</category>
       </categories>
       <tags>
-        <tag>yolo</tag>
-        <tag>cv</tag>
+        <tag>ROS2</tag>
       </tags>
   </entry>
   <entry>
@@ -708,33 +666,75 @@
       </tags>
   </entry>
   <entry>
-    <title>ROS2简介</title>
-    <url>/posts/41aa5bda/</url>
-    <content><![CDATA[<p><strong>ROS2</strong>（Robot Operating System 2）是一个用于机器人和自动化系统开发的开源软件平台。从名字可以看出，它是 <a href="https://getiot.tech/ros/ros-intro">ROS</a> 的下一代版本，目标是利用 ROS1 的优点，改进不足之处，提供一个更加稳定、可靠和可扩展的平台，满足越来越复杂和多样化的机器人应用场景。</p>
-<h2 id="功能特点"><a href="#功能特点" class="headerlink" title="功能特点"></a>功能特点<a href="https://getiot.tech/ros2/ros2-intro/#%E5%8A%9F%E8%83%BD%E7%89%B9%E7%82%B9"></a></h2><p>相较于 ROS，ROS2 具有以下特点：</p>
-<ul>
-<li><strong>更好的可移植性</strong>。ROS2 可以在不同的操作系统和处理器架构上运行，例如 Linux、Windows、macOS 等操作系统，amd64、arm64 等处理器，以满足不同用户的需求。</li>
-<li><strong>更加稳定和可靠</strong>。ROS2 在设计时考虑了一些 ROS 中存在的问题，例如通信的可靠性、多线程支持等，以提供更加稳定和可靠的运行环境。</li>
-<li><strong>更加灵活的通信机制</strong>。ROS2 引入了 DDS（Data Distribution Service）作为通信机制，它支持更多的消息传输模式，例如点对点、多播、组播等，以满足不同的应用场景。</li>
-<li><strong>更好的安全性</strong>。ROS2 提供了更加完善的安全机制，例如支持加密通信、用户身份验证等，以保护机器人系统的安全。</li>
-<li><strong>更加开放和可扩展</strong>。ROS2 的设计更加开放，可以方便地添加新的功能和扩展，例如支持其他语言、提供更多的驱动程序等。</li>
-</ul>
-<p>此外，为了支持机器人系统的开发和测试，ROS2 还提供了丰富的功能和工具，例如消息传输、参数服务器、时间同步、调试工具等。</p>
+    <title>Yolo模型的使用</title>
+    <url>/posts/1f8eda31/</url>
+    <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>需要的环境: python版本&gt;&#x3D;3.8(最好10以上),pytorch版本&gt;&#x3D;1.8</p>
+<h2 id="Conda安装Yolo过程"><a href="#Conda安装Yolo过程" class="headerlink" title="Conda安装Yolo过程"></a>Conda安装Yolo过程</h2><p>如果没有自己的虚拟环境，建议先使用conda创建一个虚拟环境</p>
+<p><code>conda create --name myenv #myenv换成你想要的环境名</code></p>
+<p>有时在创建环境时指定 Python和Pytorch 版本，可以使用以下命令，建议指定一下否则解释器路径配置可能有问题：</p>
+<p><code>conda create --name myenv python=3.11</code></p>
+<p>如果下载速度非常慢甚至无法连接，那么可能需要更换为国内镜像源</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
+
+<p>创建完成后别忘了激活环境</p>
+<p><code>conda activate myenv</code></p>
+<p>如果已经处于其他环境中应当先退出</p>
+<p><code>conda deactivate</code></p>
+<p>下面就可以正式用conda安装yolo了，只需要一句话，就可以把所有需要的依赖全部安装</p>
+<p><code>conda install conda-forge::ultralytics</code></p>
+<p>这是YOLO官方给出的最完整的安装格式,当然,如果你使用的是AMD显卡请不要用这个:</p>
+<p><code>conda install -c pytorch -c nvidia -c conda-forge pytorch torchvision pytorch-cuda=11.8 ultralytics</code></p>
+<p>使用pip也可以起到同样的效果:</p>
+<p><code>pip install ultralytics</code></p>
+<p>我们可以通过下面的指令检查依赖是否安装完毕,如果里面有ultralytics说明安装成功</p>
+<p><code>conda list</code></p>
+<p>也可以使用python命令行检查，先输入python进入python解释器，然后输入以下代码:</p>
+<p><code>from ultralytics import YOLO</code></p>
+<p>如果命令行没报错说明安装成功</p>
+<h2 id="Yolo模型的使用"><a href="#Yolo模型的使用" class="headerlink" title="Yolo模型的使用"></a>Yolo模型的使用</h2><p>Yolo可以直接在命令行使用指令进行使用,这是官方给出的一个样例:</p>
+<p><code>yolo predict model=yolo11n.pt source=&#39;https://ultralytics.com/images/bus.jpg&#39;</code></p>
+<p>如果不能下载成功可能是网络问题，需要翻墙</p>
+<p>我们也可以使用代码的形式来使用yolo模型，下面介绍具体流程，我们首先在硬盘中创建一个名为yolo11的文件，里面就存放我们需要处理的图片:</p>
+<p><img src="/images/1.png" alt="image.png-39.3kB"></p>
+<p>在YOLO11的文件里面创建三个子文件夹，一个Annotations—–图片目标检测完存放文件；JPEGlmages—–初始待检测图片存放文件；Models—–YOLO11的模型权重文件存放出文件：</p>
+<p><img src="/images/2.png" alt="2.png-35.2kB"></p>
+<p>首先我们需要先解决权重文件的下载，我们进入官网(<a href="https://docs.ultralytics.com/quickstart/#install-ultralytics">https://docs.ultralytics.com/quickstart/#install-ultralytics</a>) 点击Models进入模型下载权重文件下载界面:</p>
+<p><img src="/images/3.png" alt="20241023212313.png-114.3kB"></p>
+<p>再点击左侧的yolo11:</p>
+<p><img src="/images/4.png" alt="image.png-101.6kB"></p>
+<p>可以看到这里有五种不同的模型，分别对应五种不同的功能:</p>
+<p><img src="/images/5.png" alt="5.png-92.3kB"></p>
+<p>这里我们选择第一个，也就是实现目标检测功能的模型</p>
+<p>YOLO11检测模型总共给了我们五个权重文件。各个权重文件精度由小到大，大小由小到大排列，这里我们只进行一个简单的测验，因此使用第一个,点名字即可下载:</p>
+<p><img src="/images/6.png" alt="6.png-78.1kB"></p>
+<p>下载完后把文件放在我们刚才建的models文件夹下</p>
+<p>我们需要在yolp11文件夹下创建一个python的文件，命名为为demo.py:</p>
+<p><code>vi demo.py</code></p>
+<p>接下来，我们继续打开官网，选择Tasks模块，打开predict。下滑到界面的位置复制代码，粘贴到demo.py当中去：</p>
+<p><img src="/images/7.png" alt="image.png-163.9kB"></p>
+<p>同时我们要对部分代码进行改写:</p>
+<p><img src="/images/8.png" alt="image.png-78.2kB"></p>
+<p>在改写之前我们需要找一些图片例子，先使用我下面提供的图片。另存到JPEGlmages文件夹当中另存为1.png:</p>
+<p><img src="/images/9.png" alt="image.png-79.7kB"></p>
+<p>这个时候我们有测试文件了开始按照我的下面进行更改代码:</p>
+<p><img src="/images/10.png" alt="4{URAR2RR``II84A7W5V5UT.png-75.2kB"></p>
+<p>然后我们输入python demo.py，运行整个程序。可以得到以下标记图片。需要仔细注意标注红框的地方！</p>
+<p>出现下面的结果说明预测成功:</p>
+<p><img src="/images/11.png" alt="FKY2$)(992$3U4SN~PVP198.png-7.5kB"></p>
+<p>点击生成的图片查看结果:</p>
+<p><img src="/images/12.png" alt="image.png-2536.1kB"></p>
+<p>代码只需要改变权重文件即可，示例：</p>
+<p><img src="/images/13.png" alt="image.png-40.3kB"></p>
+<p>然后我们输入python demo.py，运行整个程序。可以得到以下标记图片：</p>
+<p><img src="/images/14.png" alt="image.png-1701kB"></p>
+<p>这里的图像分割权重文件相较于检测文件，将检测出来的图像进行了描绘边缘标记，与周围环境分割开了！</p>
 ]]></content>
       <categories>
-        <category>ROS2</category>
+        <category>无人机项目</category>
       </categories>
       <tags>
-        <tag>ROS2</tag>
+        <tag>yolo</tag>
+        <tag>cv</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>这是我的第一篇博客</title>
-    <url>/posts/72f16dec/</url>
-    <content><![CDATA[<p>欢迎来到我的个人博客，这里会记录我的学习内容和研究生生活</p>
-]]></content>
-      <categories>
-        <category>???</category>
-      </categories>
   </entry>
 </search>
