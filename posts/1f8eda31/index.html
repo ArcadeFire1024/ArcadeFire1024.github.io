@@ -119,27 +119,27 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="准备工作需要的环境: python版本&gt;&#x3D;3.8(最好10以上),pytorch版本&gt;&#x3D;1.8 Conda安装Yolo过程如果没有自己的虚拟环境，建议先使用conda创建一个虚拟环境 conda create --name myenv #myenv换成你想要的环境名 有时在创建环境时指定 Python和Pytorch 版本，可以使用以下命令，建议指定一下否则解释器路">
 <meta property="og:locale">
-<meta property="og:image" content="https://static.zybuluo.com/planeli/usm85109d0pwv17oz57fqllx/image.png">
-<meta property="og:image" content="https://static.zybuluo.com/planeli/fnkeer255h5iubtuwvl1x1ht/2.png">
-<meta property="og:image" content="https://static.zybuluo.com/planeli/0zfgshonlqxihaup82k4hqhw/20241023212313.png">
-<meta property="og:image" content="https://static.zybuluo.com/planeli/drdzcpotj40nt9m4jx296z31/image.png">
-<meta property="og:image" content="https://static.zybuluo.com/planeli/gm0l1zcochxppmkkdapvl7fv/5.png">
-<meta property="og:image" content="https://static.zybuluo.com/planeli/oyxg73mtpbq6aw9bdgodv54n/6.png">
-<meta property="og:image" content="https://static.zybuluo.com/planeli/30itfa5tgpxzl2clemwcd7t3/image.png">
-<meta property="og:image" content="https://static.zybuluo.com/planeli/gnv14mwsby66126nl1k90bre/image.png">
-<meta property="og:image" content="https://static.zybuluo.com/planeli/himpsz3vm49bwjk5hh2gimpq/image.png">
-<meta property="og:image" content="https://static.zybuluo.com/planeli/t4y0s19dbwcrnisw33s2469h/4%7BURAR2RR%60%60II84A7W5V5UT.png">
-<meta property="og:image" content="https://static.zybuluo.com/planeli/aoysusg2ywrxdkhcimqnhbsq/FKY2$%29%28992$3U4SN~PVP198.png">
-<meta property="og:image" content="https://static.zybuluo.com/planeli/i3hqsz8vty5z2ppoe5ekzxom/image.png">
-<meta property="og:image" content="https://static.zybuluo.com/planeli/6li1f8cva4ehuf8q6rium3bz/image.png">
-<meta property="og:image" content="https://static.zybuluo.com/planeli/0dyv7kc6or9pzknycklwi36r/image.png">
+<meta property="og:image" content="http://example.com/images/1.png">
+<meta property="og:image" content="http://example.com/images/2.png">
+<meta property="og:image" content="http://example.com/images/3.png">
+<meta property="og:image" content="http://example.com/images/4.png">
+<meta property="og:image" content="http://example.com/images/5.png">
+<meta property="og:image" content="http://example.com/images/6.png">
+<meta property="og:image" content="http://example.com/images/7.png">
+<meta property="og:image" content="http://example.com/images/8.png">
+<meta property="og:image" content="http://example.com/images/9.png">
+<meta property="og:image" content="http://example.com/images/10.png">
+<meta property="og:image" content="http://example.com/images/11.png">
+<meta property="og:image" content="http://example.com/images/12.png">
+<meta property="og:image" content="http://example.com/images/13.png">
+<meta property="og:image" content="http://example.com/images/14.png">
 <meta property="article:published_time" content="2024-10-24T04:37:59.000Z">
-<meta property="article:modified_time" content="2024-10-24T12:10:12.261Z">
+<meta property="article:modified_time" content="2024-10-24T12:46:30.996Z">
 <meta property="article:author" content="Continuefly Li">
 <meta property="article:tag" content="yolo">
 <meta property="article:tag" content="cv">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://static.zybuluo.com/planeli/usm85109d0pwv17oz57fqllx/image.png">
+<meta name="twitter:image" content="http://example.com/images/1.png">
 
 
 
@@ -484,38 +484,38 @@
 <p><code>yolo predict model=yolo11n.pt source=&#39;https://ultralytics.com/images/bus.jpg&#39;</code></p>
 <p>如果不能下载成功可能是网络问题，需要翻墙</p>
 <p>我们也可以使用代码的形式来使用yolo模型，下面介绍具体流程，我们首先在硬盘中创建一个名为yolo11的文件，里面就存放我们需要处理的图片:</p>
-<p><img src="https://static.zybuluo.com/planeli/usm85109d0pwv17oz57fqllx/image.png" alt="image.png-39.3kB"></p>
+<p><img src="/images/1.png" alt="image.png-39.3kB"></p>
 <p>在YOLO11的文件里面创建三个子文件夹，一个Annotations—–图片目标检测完存放文件；JPEGlmages—–初始待检测图片存放文件；Models—–YOLO11的模型权重文件存放出文件：</p>
-<p><img src="https://static.zybuluo.com/planeli/fnkeer255h5iubtuwvl1x1ht/2.png" alt="2.png-35.2kB"></p>
+<p><img src="/images/2.png" alt="2.png-35.2kB"></p>
 <p>首先我们需要先解决权重文件的下载，我们进入官网(<a target="_blank" rel="noopener" href="https://docs.ultralytics.com/quickstart/#install-ultralytics">https://docs.ultralytics.com/quickstart/#install-ultralytics</a>) 点击Models进入模型下载权重文件下载界面:</p>
-<p><img src="https://static.zybuluo.com/planeli/0zfgshonlqxihaup82k4hqhw/20241023212313.png" alt="20241023212313.png-114.3kB"></p>
+<p><img src="/images/3.png" alt="20241023212313.png-114.3kB"></p>
 <p>再点击左侧的yolo11:</p>
-<p><img src="https://static.zybuluo.com/planeli/drdzcpotj40nt9m4jx296z31/image.png" alt="image.png-101.6kB"></p>
+<p><img src="/images/4.png" alt="image.png-101.6kB"></p>
 <p>可以看到这里有五种不同的模型，分别对应五种不同的功能:</p>
-<p><img src="https://static.zybuluo.com/planeli/gm0l1zcochxppmkkdapvl7fv/5.png" alt="5.png-92.3kB"></p>
+<p><img src="/images/5.png" alt="5.png-92.3kB"></p>
 <p>这里我们选择第一个，也就是实现目标检测功能的模型</p>
 <p>YOLO11检测模型总共给了我们五个权重文件。各个权重文件精度由小到大，大小由小到大排列，这里我们只进行一个简单的测验，因此使用第一个,点名字即可下载:</p>
-<p><img src="https://static.zybuluo.com/planeli/oyxg73mtpbq6aw9bdgodv54n/6.png" alt="6.png-78.1kB"></p>
+<p><img src="/images/6.png" alt="6.png-78.1kB"></p>
 <p>下载完后把文件放在我们刚才建的models文件夹下</p>
 <p>我们需要在yolp11文件夹下创建一个python的文件，命名为为demo.py:</p>
 <p><code>vi demo.py</code></p>
 <p>接下来，我们继续打开官网，选择Tasks模块，打开predict。下滑到界面的位置复制代码，粘贴到demo.py当中去：</p>
-<p><img src="https://static.zybuluo.com/planeli/30itfa5tgpxzl2clemwcd7t3/image.png" alt="image.png-163.9kB"></p>
+<p><img src="/images/7.png" alt="image.png-163.9kB"></p>
 <p>同时我们要对部分代码进行改写:</p>
-<p><img src="https://static.zybuluo.com/planeli/gnv14mwsby66126nl1k90bre/image.png" alt="image.png-78.2kB"></p>
+<p><img src="/images/8.png" alt="image.png-78.2kB"></p>
 <p>在改写之前我们需要找一些图片例子，先使用我下面提供的图片。另存到JPEGlmages文件夹当中另存为1.png:</p>
-<p><img src="https://static.zybuluo.com/planeli/himpsz3vm49bwjk5hh2gimpq/image.png" alt="image.png-79.7kB"></p>
+<p><img src="/images/9.png" alt="image.png-79.7kB"></p>
 <p>这个时候我们有测试文件了开始按照我的下面进行更改代码:</p>
-<p><img src="https://static.zybuluo.com/planeli/t4y0s19dbwcrnisw33s2469h/4%7BURAR2RR%60%60II84A7W5V5UT.png" alt="4{URAR2RR``II84A7W5V5UT.png-75.2kB"></p>
+<p><img src="/images/10.png" alt="4{URAR2RR``II84A7W5V5UT.png-75.2kB"></p>
 <p>然后我们输入python demo.py，运行整个程序。可以得到以下标记图片。需要仔细注意标注红框的地方！</p>
 <p>出现下面的结果说明预测成功:</p>
-<p><img src="https://static.zybuluo.com/planeli/aoysusg2ywrxdkhcimqnhbsq/FKY2$%29%28992$3U4SN~PVP198.png" alt="FKY2$)(992$3U4SN~PVP198.png-7.5kB"></p>
+<p><img src="/images/11.png" alt="FKY2$)(992$3U4SN~PVP198.png-7.5kB"></p>
 <p>点击生成的图片查看结果:</p>
-<p><img src="https://static.zybuluo.com/planeli/i3hqsz8vty5z2ppoe5ekzxom/image.png" alt="image.png-2536.1kB"></p>
+<p><img src="/images/12.png" alt="image.png-2536.1kB"></p>
 <p>代码只需要改变权重文件即可，示例：</p>
-<p><img src="https://static.zybuluo.com/planeli/6li1f8cva4ehuf8q6rium3bz/image.png" alt="image.png-40.3kB"></p>
+<p><img src="/images/13.png" alt="image.png-40.3kB"></p>
 <p>然后我们输入python demo.py，运行整个程序。可以得到以下标记图片：</p>
-<p><img src="https://static.zybuluo.com/planeli/0dyv7kc6or9pzknycklwi36r/image.png" alt="image.png-1701kB"></p>
+<p><img src="/images/14.png" alt="image.png-1701kB"></p>
 <p>这里的图像分割权重文件相较于检测文件，将检测出来的图像进行了描绘边缘标记，与周围环境分割开了！</p>
 
       
