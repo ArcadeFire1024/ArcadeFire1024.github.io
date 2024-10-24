@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ROS2简介</title>
+    <url>/posts/41aa5bda/</url>
+    <content><![CDATA[<p><strong>ROS2</strong>（Robot Operating System 2）是一个用于机器人和自动化系统开发的开源软件平台。从名字可以看出，它是 <a href="https://getiot.tech/ros/ros-intro">ROS</a> 的下一代版本，目标是利用 ROS1 的优点，改进不足之处，提供一个更加稳定、可靠和可扩展的平台，满足越来越复杂和多样化的机器人应用场景。</p>
+<h2 id="功能特点"><a href="#功能特点" class="headerlink" title="功能特点"></a>功能特点<a href="https://getiot.tech/ros2/ros2-intro/#%E5%8A%9F%E8%83%BD%E7%89%B9%E7%82%B9"></a></h2><p>相较于 ROS，ROS2 具有以下特点：</p>
+<ul>
+<li><strong>更好的可移植性</strong>。ROS2 可以在不同的操作系统和处理器架构上运行，例如 Linux、Windows、macOS 等操作系统，amd64、arm64 等处理器，以满足不同用户的需求。</li>
+<li><strong>更加稳定和可靠</strong>。ROS2 在设计时考虑了一些 ROS 中存在的问题，例如通信的可靠性、多线程支持等，以提供更加稳定和可靠的运行环境。</li>
+<li><strong>更加灵活的通信机制</strong>。ROS2 引入了 DDS（Data Distribution Service）作为通信机制，它支持更多的消息传输模式，例如点对点、多播、组播等，以满足不同的应用场景。</li>
+<li><strong>更好的安全性</strong>。ROS2 提供了更加完善的安全机制，例如支持加密通信、用户身份验证等，以保护机器人系统的安全。</li>
+<li><strong>更加开放和可扩展</strong>。ROS2 的设计更加开放，可以方便地添加新的功能和扩展，例如支持其他语言、提供更多的驱动程序等。</li>
+</ul>
+<p>此外，为了支持机器人系统的开发和测试，ROS2 还提供了丰富的功能和工具，例如消息传输、参数服务器、时间同步、调试工具等。</p>
+]]></content>
+      <categories>
+        <category>ROS2</category>
+      </categories>
+      <tags>
+        <tag>ROS2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>这是我的第一篇博客</title>
+    <url>/posts/72f16dec/</url>
+    <content><![CDATA[<p>欢迎来到我的个人博客，这里会记录我的学习内容和研究生生活</p>
+]]></content>
+      <categories>
+        <category>???</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Yolo各代模型调研及比对</title>
     <url>/posts/a5371350/</url>
     <content><![CDATA[<h2 id="调研背景"><a href="#调研背景" class="headerlink" title="调研背景"></a>调研背景</h2><p>Yolo模型由Ultralytics公司开发，该公司已经为Yolo模型创建了详细的使用和配置网站，因此直接通过访问官网，便可得到最为准确详细且最具有时效性的资料。结合我们无人机项目的具体需求，我的调查重心主要集中在v5，v8，v9，v11这几个大版本号上</p>
@@ -568,6 +598,74 @@
       </tags>
   </entry>
   <entry>
+    <title>docker基础知识</title>
+    <url>/posts/7b36b89c/</url>
+    <content><![CDATA[<h3>docker的基本概念</h3>
+
+
+<ul>
+<li><strong>镜像（Image）</strong>：Docker 镜像（Image），就相当于是一个 root 文件系统。</li>
+<li><strong>容器（Container）</strong>：镜像（Image）和容器（Container）的关系，就像是面向对象程序设计中的类和实例一样，镜像是静态的定义，容器是镜像运行时的实体。容器可以被创建、启动、停止、删除、暂停等。</li>
+<li><strong>仓库（Repository）</strong>：仓库可看成一个代码控制中心，用来保存镜像。</li>
+</ul>
+<h3>docker常用的指令集</h3>
+
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker --version #检查docker当前版本</span><br><span class="line">docker ps #列出正在运行的容器的状态</span><br><span class="line">docker images #列出所有已经安装的镜像</span><br><span class="line">docker run &lt;image&gt; [--name xxx] #运行安装好的镜像,并可以取名为xxx</span><br><span class="line">docker ps -a #列出所有的容器的状态，无论是否在运行</span><br><span class="line">docker stop &lt;container id | container name&gt; #让正在运行的容器停止运行</span><br><span class="line">docker rmi &lt;image&gt; #删除安装的镜像</span><br><span class="line">docker pull #从远程仓库拉取镜像</span><br></pre></td></tr></table></figure>
+
+<p>其中docker run的选项组合尤为丰富，下面详细展开说一说</p>
+<h3>如何让docker容器启动时就自动执行某些指令
+</h3>
+
+<p>比如我希望我的Ubuntu容器在启动后立刻在屏幕中返回”Hello World”,我可以使用下面的指令</p>
+<p><code>docker run ubuntu:15.10 /bin/echo &quot;Hello world&quot;</code></p>
+<p>各个参数解析：</p>
+<ul>
+<li><strong>docker:</strong> Docker 的二进制执行文件。</li>
+<li><strong>run:</strong> 与前面的 docker 组合来运行一个容器。</li>
+<li><strong>ubuntu:15.10</strong> 指定要运行的镜像，Docker 首先从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像。</li>
+<li><strong>&#x2F;bin&#x2F;echo “Hello world”:</strong> 在启动的容器里执行的命令</li>
+</ul>
+<p>以上命令完整的意思可以解释为：Docker 以 ubuntu15.10 镜像创建一个新容器，然后在容器里执行 bin&#x2F;echo “Hello world”，然后输出结果,值得注意的是，这里的”&#x2F;bin&#x2F;echo”是容器里的系统调用而不是本地主机的。</p>
+<h3>如何让docker容器转到后台运行</h3>
+
+
+<p>有时我并不希望容器在我的shell里面执行，因为这样会阻塞我的shell面板让我无法再键入指令，这时就也需要用到-d选项，使其在后台运行，不过docker依然会在shell返回容器的id给我们</p>
+<p><code>docker run -d ubuntu:15.10 /bin/echo &quot;Hello world&quot;</code></p>
+<p>这样我们的shell就不会再打印Hello World，取而代之的是我们容器的id</p>
+<p>如果我们想要获取输出的内容，可以使用<code>docker logs &lt;container id | container name&gt; </code> 进行获取</p>
+<h3>运行交互式的容器</h3>
+我们通过 docker 的两个参数 -i -t，让 docker 运行的容器实现"对话"的能力：
+
+<figure class="highlight docker"><figcaption><span>run -i -t ubuntu:15.10</span><a href="/bin/bash">link</a></figcaption><table><tr><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="language-bash"> -i -t ubuntu:15.10 /bin/bash</span></span><br><span class="line">root@<span class="number">0123</span>ce188bd8:/<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>各个参数解析：</p>
+<p>-t: 在新容器内指定一个伪终端或终端。</p>
+<p>-i: 允许你对容器内的标准输入 (STDIN) 进行交互。</p>
+<p>注意第二行 root@0123ce188bd8:&#x2F;#，此时我们已进入一个 ubuntu15.10 系统的容器</p>
+<p>我们尝试在容器中运行命令 cat &#x2F;proc&#x2F;version和ls分别查看当前系统的版本信息和当前目录下的文件列表</p>
+<figure class="highlight plaintext"><figcaption><span>cat</span><a href="/proc/version">link</a></figcaption><table><tr><td class="code"><pre><span class="line">Linux version 4.4.0-151-generic (buildd@lgw01-amd64-043) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10) ) #178-Ubuntu SMP Tue Jun 11 08:30:22 UTC 2019</span><br><span class="line">root@0123ce188bd8:/# ls</span><br><span class="line">bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br><span class="line">root@0123ce188bd8:/# `</span><br></pre></td></tr></table></figure>
+
+<p>我们可以通过运行 exit 命令或者使用 CTRL+D 来退出容器。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@0123ce188bd8:/#  exit</span><br><span class="line">exit</span><br><span class="line">root@runoob:~# </span><br></pre></td></tr></table></figure>
+
+<p>注意第三行中 <strong>root@runoob:~#</strong> 表明我们已经退出了当前的容器，返回到当前的主机中。</p>
+<h3>歪门邪道</h3>
+
+
+<p>一个个删除不再需要的容器是非常麻烦的，因此docker为用户提供了一条可以删除所有停止运行容器的指令:</p>
+<p><code>docker container prune</code></p>
+<p>当然，在学习docker的过程中想必大家已经创建了很多后台运行的容器，一个一个输入名称进行删除实在太麻烦了，chatgpt提供了一条可以立刻删除所有容器的指令（平常慎用）</p>
+<p><code>docker rm -f $(docker ps -aq)</code></p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Yolo模型的使用</title>
     <url>/posts/1f8eda31/</url>
     <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>需要的环境: python版本&gt;&#x3D;3.8(最好10以上),pytorch版本&gt;&#x3D;1.8</p>
@@ -638,103 +736,5 @@
         <tag>yolo</tag>
         <tag>cv</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>docker基础知识</title>
-    <url>/posts/7b36b89c/</url>
-    <content><![CDATA[<h3>docker的基本概念</h3>
-
-
-<ul>
-<li><strong>镜像（Image）</strong>：Docker 镜像（Image），就相当于是一个 root 文件系统。</li>
-<li><strong>容器（Container）</strong>：镜像（Image）和容器（Container）的关系，就像是面向对象程序设计中的类和实例一样，镜像是静态的定义，容器是镜像运行时的实体。容器可以被创建、启动、停止、删除、暂停等。</li>
-<li><strong>仓库（Repository）</strong>：仓库可看成一个代码控制中心，用来保存镜像。</li>
-</ul>
-<h3>docker常用的指令集</h3>
-
-
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker --version #检查docker当前版本</span><br><span class="line">docker ps #列出正在运行的容器的状态</span><br><span class="line">docker images #列出所有已经安装的镜像</span><br><span class="line">docker run &lt;image&gt; [--name xxx] #运行安装好的镜像,并可以取名为xxx</span><br><span class="line">docker ps -a #列出所有的容器的状态，无论是否在运行</span><br><span class="line">docker stop &lt;container id | container name&gt; #让正在运行的容器停止运行</span><br><span class="line">docker rmi &lt;image&gt; #删除安装的镜像</span><br><span class="line">docker pull #从远程仓库拉取镜像</span><br></pre></td></tr></table></figure>
-
-<p>其中docker run的选项组合尤为丰富，下面详细展开说一说</p>
-<h3>如何让docker容器启动时就自动执行某些指令
-</h3>
-
-<p>比如我希望我的Ubuntu容器在启动后立刻在屏幕中返回”Hello World”,我可以使用下面的指令</p>
-<p><code>docker run ubuntu:15.10 /bin/echo &quot;Hello world&quot;</code></p>
-<p>各个参数解析：</p>
-<ul>
-<li><strong>docker:</strong> Docker 的二进制执行文件。</li>
-<li><strong>run:</strong> 与前面的 docker 组合来运行一个容器。</li>
-<li><strong>ubuntu:15.10</strong> 指定要运行的镜像，Docker 首先从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像。</li>
-<li><strong>&#x2F;bin&#x2F;echo “Hello world”:</strong> 在启动的容器里执行的命令</li>
-</ul>
-<p>以上命令完整的意思可以解释为：Docker 以 ubuntu15.10 镜像创建一个新容器，然后在容器里执行 bin&#x2F;echo “Hello world”，然后输出结果,值得注意的是，这里的”&#x2F;bin&#x2F;echo”是容器里的系统调用而不是本地主机的。</p>
-<h3>如何让docker容器转到后台运行</h3>
-
-
-<p>有时我并不希望容器在我的shell里面执行，因为这样会阻塞我的shell面板让我无法再键入指令，这时就也需要用到-d选项，使其在后台运行，不过docker依然会在shell返回容器的id给我们</p>
-<p><code>docker run -d ubuntu:15.10 /bin/echo &quot;Hello world&quot;</code></p>
-<p>这样我们的shell就不会再打印Hello World，取而代之的是我们容器的id</p>
-<p>如果我们想要获取输出的内容，可以使用<code>docker logs &lt;container id | container name&gt; </code> 进行获取</p>
-<h3>运行交互式的容器</h3>
-我们通过 docker 的两个参数 -i -t，让 docker 运行的容器实现"对话"的能力：
-
-<figure class="highlight docker"><figcaption><span>run -i -t ubuntu:15.10</span><a href="/bin/bash">link</a></figcaption><table><tr><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="language-bash"> -i -t ubuntu:15.10 /bin/bash</span></span><br><span class="line">root@<span class="number">0123</span>ce188bd8:/<span class="comment">#</span></span><br></pre></td></tr></table></figure>
-
-<p>各个参数解析：</p>
-<p>-t: 在新容器内指定一个伪终端或终端。</p>
-<p>-i: 允许你对容器内的标准输入 (STDIN) 进行交互。</p>
-<p>注意第二行 root@0123ce188bd8:&#x2F;#，此时我们已进入一个 ubuntu15.10 系统的容器</p>
-<p>我们尝试在容器中运行命令 cat &#x2F;proc&#x2F;version和ls分别查看当前系统的版本信息和当前目录下的文件列表</p>
-<figure class="highlight plaintext"><figcaption><span>cat</span><a href="/proc/version">link</a></figcaption><table><tr><td class="code"><pre><span class="line">Linux version 4.4.0-151-generic (buildd@lgw01-amd64-043) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10) ) #178-Ubuntu SMP Tue Jun 11 08:30:22 UTC 2019</span><br><span class="line">root@0123ce188bd8:/# ls</span><br><span class="line">bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br><span class="line">root@0123ce188bd8:/# `</span><br></pre></td></tr></table></figure>
-
-<p>我们可以通过运行 exit 命令或者使用 CTRL+D 来退出容器。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@0123ce188bd8:/#  exit</span><br><span class="line">exit</span><br><span class="line">root@runoob:~# </span><br></pre></td></tr></table></figure>
-
-<p>注意第三行中 <strong>root@runoob:~#</strong> 表明我们已经退出了当前的容器，返回到当前的主机中。</p>
-<h3>歪门邪道</h3>
-
-
-<p>一个个删除不再需要的容器是非常麻烦的，因此docker为用户提供了一条可以删除所有停止运行容器的指令:</p>
-<p><code>docker container prune</code></p>
-<p>当然，在学习docker的过程中想必大家已经创建了很多后台运行的容器，一个一个输入名称进行删除实在太麻烦了，chatgpt提供了一条可以立刻删除所有容器的指令（平常慎用）</p>
-<p><code>docker rm -f $(docker ps -aq)</code></p>
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ROS2简介</title>
-    <url>/posts/41aa5bda/</url>
-    <content><![CDATA[<p><strong>ROS2</strong>（Robot Operating System 2）是一个用于机器人和自动化系统开发的开源软件平台。从名字可以看出，它是 <a href="https://getiot.tech/ros/ros-intro">ROS</a> 的下一代版本，目标是利用 ROS1 的优点，改进不足之处，提供一个更加稳定、可靠和可扩展的平台，满足越来越复杂和多样化的机器人应用场景。</p>
-<h2 id="功能特点"><a href="#功能特点" class="headerlink" title="功能特点"></a>功能特点<a href="https://getiot.tech/ros2/ros2-intro/#%E5%8A%9F%E8%83%BD%E7%89%B9%E7%82%B9"></a></h2><p>相较于 ROS，ROS2 具有以下特点：</p>
-<ul>
-<li><strong>更好的可移植性</strong>。ROS2 可以在不同的操作系统和处理器架构上运行，例如 Linux、Windows、macOS 等操作系统，amd64、arm64 等处理器，以满足不同用户的需求。</li>
-<li><strong>更加稳定和可靠</strong>。ROS2 在设计时考虑了一些 ROS 中存在的问题，例如通信的可靠性、多线程支持等，以提供更加稳定和可靠的运行环境。</li>
-<li><strong>更加灵活的通信机制</strong>。ROS2 引入了 DDS（Data Distribution Service）作为通信机制，它支持更多的消息传输模式，例如点对点、多播、组播等，以满足不同的应用场景。</li>
-<li><strong>更好的安全性</strong>。ROS2 提供了更加完善的安全机制，例如支持加密通信、用户身份验证等，以保护机器人系统的安全。</li>
-<li><strong>更加开放和可扩展</strong>。ROS2 的设计更加开放，可以方便地添加新的功能和扩展，例如支持其他语言、提供更多的驱动程序等。</li>
-</ul>
-<p>此外，为了支持机器人系统的开发和测试，ROS2 还提供了丰富的功能和工具，例如消息传输、参数服务器、时间同步、调试工具等。</p>
-]]></content>
-      <categories>
-        <category>ROS2</category>
-      </categories>
-      <tags>
-        <tag>ROS2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>这是我的第一篇博客</title>
-    <url>/posts/72f16dec/</url>
-    <content><![CDATA[<p>欢迎来到我的个人博客，这里会记录我的学习内容和研究生生活</p>
-]]></content>
-      <categories>
-        <category>???</category>
-      </categories>
   </entry>
 </search>
