@@ -101,7 +101,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="yolo,cv," />
 
 
 
@@ -112,12 +112,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2024/index.html">
+<meta name="description" content="准备工作需要的环境: python版本&gt;&#x3D;3.8(最好10以上),pytorch版本&gt;&#x3D;1.8 Conda安装Yolo过程如果没有自己的虚拟环境，建议先使用conda创建一个虚拟环境 conda create --name myenv #myenv换成你想要的环境名 有时在创建环境时指定 Python和Pytorch 版本，可以使用以下命令，建议指定一下否则解释器路">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Yolo模型的使用">
+<meta property="og:url" content="http://example.com/posts/1f8eda31/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="准备工作需要的环境: python版本&gt;&#x3D;3.8(最好10以上),pytorch版本&gt;&#x3D;1.8 Conda安装Yolo过程如果没有自己的虚拟环境，建议先使用conda创建一个虚拟环境 conda create --name myenv #myenv换成你想要的环境名 有时在创建环境时指定 Python和Pytorch 版本，可以使用以下命令，建议指定一下否则解释器路">
 <meta property="og:locale">
+<meta property="article:published_time" content="2024-10-17T04:37:59.000Z">
+<meta property="article:modified_time" content="2024-10-24T08:52:17.970Z">
 <meta property="article:author" content="Continuefly Li">
+<meta property="article:tag" content="yolo">
+<meta property="article:tag" content="cv">
 <meta name="twitter:card" content="summary">
 
 
@@ -148,13 +154,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/archives/2024/"/>
+  <link rel="canonical" href="http://example.com/posts/1f8eda31/"/>
 
 
 
 
 
-  <title>归档 | Hexo</title>
+  <title>Yolo模型的使用 | Hexo</title>
   
 
 
@@ -173,7 +179,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -301,222 +307,345 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/1f8eda31/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">Yolo模型的使用</h1>
         
+
+        <div class="post-meta">
+	
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-10-17T12:37:59+08:00">
+                2024-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 5 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%97%A0%E4%BA%BA%E6%9C%BA%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index">
+                    <span itemprop="name">无人机项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>需要的环境: python版本&gt;&#x3D;3.8(最好10以上),pytorch版本&gt;&#x3D;1.8</p>
+<h2 id="Conda安装Yolo过程"><a href="#Conda安装Yolo过程" class="headerlink" title="Conda安装Yolo过程"></a>Conda安装Yolo过程</h2><p>如果没有自己的虚拟环境，建议先使用conda创建一个虚拟环境</p>
+<p><code>conda create --name myenv #myenv换成你想要的环境名</code></p>
+<p>有时在创建环境时指定 Python和Pytorch 版本，可以使用以下命令，建议指定一下否则解释器路径配置可能有问题：</p>
+<p><code>conda create --name myenv python=3.11 pytorch=1.8.0</code></p>
+<p>这是YOLO官方给出的最完整的安装格式,当然,如果你使用的是AMD显卡请不要用这个:</p>
+<p><code>conda install -c pytorch -c nvidia -c conda-forge pytorch torchvision pytorch-cuda=11.8 ultralytics</code></p>
+<p>如果下载速度非常慢甚至无法连接，那么可能需要更换为国内镜像源</p>
+<pre><code class="conda">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/
+conda config --set show_channel_urls yes```
+
+创建完成后别忘了激活环境
+
+`conda activate myenv`
+
+如果已经处于其他环境中应当先退出
+
+`conda deactivate`
+
+下面就可以正式用conda安装yolo了，只需要一句话，就可以把所有需要的依赖全部安装
+
+`conda install conda-forge::ultralytics`
+
+使用pip也可以起到同样的效果:
+
+`pip install ultralytics`
+
+我们可以通过下面的指令检查依赖是否安装完毕,如果里面有ultralytics说明安装成功
+
+`conda list`
+
+也可以使用python命令行检查，先输入python进入python解释器，然后输入以下代码:
+
+`from ultralytics import YOLO`
+
+如果命令行没报错说明安装成功
+
+## Yolo模型的使用
+
+Yolo可以直接在命令行使用指令进行使用,这是官方给出的一个样例:
+
+`yolo predict model=yolo11n.pt source=&#39;https://ultralytics.com/images/bus.jpg&#39;`
+
+如果不能下载成功可能是网络问题，需要翻墙
+
+我们也可以使用代码的形式来使用yolo模型，下面介绍具体流程，我们首先在硬盘中创建一个名为yolo11的文件，里面就存放我们需要处理的图片:
+
+![image.png-39.3kB][1]
+
+
+在YOLO11的文件里面创建三个子文件夹，一个Annotations-----图片目标检测完存放文件；JPEGlmages-----初始待检测图片存放文件；Models-----YOLO11的模型权重文件存放出文件：
+
+![A0FOB_H34&#123;ANLSY0OMDF`BL.png-35.2kB][2]
+
+首先我们需要先解决权重文件的下载，我们进入官网(https://docs.ultralytics.com/quickstart/#install-ultralytics)点击Models进入模型下载权重文件下载界面:
+
+![20241023212313.png-114.3kB][3]
+
+再点击左侧的yolo11:
+
+![image.png-101.6kB][4]
+
+可以看到这里有五种不同的模型，分别对应五种不同的功能:
+
+![BC]~S9EPE[Q`J9785XN1_72.png-92.3kB][5]
+
+这里我们选择第一个，也就是实现目标检测功能的模型
+
+YOLO11检测模型总共给了我们五个权重文件。各个权重文件精度由小到大，大小由小到大排列，这里我们只进行一个简单的测验，因此使用第一个,点名字即可下载:
+
+![5R3KG2G&#125;O7S3AC6F@C`A``P.png-78.1kB][6]
+
+下载完后把文件放在我们刚才建的models文件夹下
+
+我们需要在yolp11文件夹下创建一个python的文件，命名为为demo.py:
+
+`vi demo.py`
+
+接下来，我们继续打开官网，选择Tasks模块，打开predict。下滑到界面的位置复制代码，粘贴到demo.py当中去：
+
+![image.png-163.9kB][7]
+
+同时我们要对部分代码进行改写:
+
+![image.png-78.2kB][8]
+
+在改写之前我们需要找一些图片例子，先使用我下面提供的图片。另存到JPEGlmages文件夹当中另存为1.png:
+
+![image.png-79.7kB][9]
+
+这个时候我们有测试文件了开始按照我的下面进行更改代码:
+
+![4&#123;URAR2RR``II84A7W5V5UT.png-75.2kB][10]
+
+然后我们输入python demo.py，运行整个程序。可以得到以下标记图片。需要仔细注意标注红框的地方！
+
+出现下面的结果说明预测成功:
+
+![FKY2$)(992$3U4SN~PVP198.png-7.5kB][11]
+
+点击生成的图片查看结果:
+
+![image.png-2536.1kB][12]
+
+代码只需要改变权重文件即可，示例：
+
+![image.png-40.3kB][13]
+
+
+  [1]: https://static.zybuluo.com/planeli/usm85109d0pwv17oz57fqllx/image.png
+  [2]: https://static.zybuluo.com/planeli/xex4w1wmutygxs7jmht8ifry/A0FOB_H34%7BANLSY0OMDF%60BL.png
+  [3]: https://static.zybuluo.com/planeli/0zfgshonlqxihaup82k4hqhw/20241023212313.png
+  [4]: https://static.zybuluo.com/planeli/drdzcpotj40nt9m4jx296z31/image.png
+  [5]: https://static.zybuluo.com/planeli/roogapyx96skg895bt90ujgj/BC%5D~S9EPE%5BQ%60J9785XN1_72.png
+  [6]: https://static.zybuluo.com/planeli/m2m2lz3xbu6ttnnb4bhs09nm/5R3KG2G%7DO7S3AC6F@C%60A%60%60P.png
+  [7]: https://static.zybuluo.com/planeli/30itfa5tgpxzl2clemwcd7t3/image.png
+  [8]: https://static.zybuluo.com/planeli/gnv14mwsby66126nl1k90bre/image.png
+  [9]: https://static.zybuluo.com/planeli/himpsz3vm49bwjk5hh2gimpq/image.png
+  [10]: https://static.zybuluo.com/planeli/t4y0s19dbwcrnisw33s2469h/4%7BURAR2RR%60%60II84A7W5V5UT.png
+  [11]: https://static.zybuluo.com/planeli/aoysusg2ywrxdkhcimqnhbsq/FKY2$%29%28992$3U4SN~PVP198.png
+  [12]: https://static.zybuluo.com/planeli/i3hqsz8vty5z2ppoe5ekzxom/image.png
+  [13]: https://static.zybuluo.com/planeli/6li1f8cva4ehuf8q6rium3bz/image.png
+</code></pre>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/yolo/" rel="tag"><i class="fa fa-tag"></i> yolo</a>
+          
+            <a href="/tags/cv/" rel="tag"><i class="fa fa-tag"></i> cv</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
         
-        
+
         
 
         
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2024">2024</h1>
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
           </div>
         
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/posts/a5371350/" itemprop="url">
-              
-                <span itemprop="name">Yolo各代模型调研及比对</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2024-10-17T12:37:59+08:00"
-              content="2024-10-17" >
-          10-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+        </div>
+      
       
 
-        
-        
-        
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/7b36b89c/" rel="next" title="docker基础知识">
+                <i class="fa fa-chevron-left"></i> docker基础知识
+              </a>
+            
+          </div>
 
-        
-        
+          <span class="post-nav-divider"></span>
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/posts/1f8eda31/" itemprop="url">
-              
-                <span itemprop="name">Yolo模型的使用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2024-10-17T12:37:59+08:00"
-              content="2024-10-17" >
-          10-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/a5371350/" rel="prev" title="Yolo各代模型调研及比对">
+                Yolo各代模型调研及比对 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/posts/7b36b89c/" itemprop="url">
-              
-                <span itemprop="name">docker基础知识</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2024-10-09T14:37:59+08:00"
-              content="2024-10-09" >
-          10-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/posts/41aa5bda/" itemprop="url">
-              
-                <span itemprop="name">ROS2简介</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2024-10-08T19:15:24+08:00"
-              content="2024-10-08" >
-          10-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/posts/72f16dec/" itemprop="url">
-              
-                <span itemprop="name">这是我的第一篇博客</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2024-10-06T15:55:05+08:00"
-              content="2024-10-06" >
-          10-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-    </div>
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -524,6 +653,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -544,8 +677,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -609,6 +751,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conda%E5%AE%89%E8%A3%85Yolo%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">Conda安装Yolo过程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -766,6 +924,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
