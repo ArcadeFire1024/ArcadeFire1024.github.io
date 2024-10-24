@@ -32,16 +32,16 @@
 <p>我们也可以使用代码的形式来使用yolo模型，下面介绍具体流程，我们首先在硬盘中创建一个名为yolo11的文件，里面就存放我们需要处理的图片:</p>
 <p><img src="https://static.zybuluo.com/planeli/usm85109d0pwv17oz57fqllx/image.png" alt="image.png-39.3kB"></p>
 <p>在YOLO11的文件里面创建三个子文件夹，一个Annotations—–图片目标检测完存放文件；JPEGlmages—–初始待检测图片存放文件；Models—–YOLO11的模型权重文件存放出文件：</p>
-<p>![A0FOB_H34{ANLSY0OMDF&#96;BL.png-35.2kB]<a href="https://static.zybuluo.com/planeli/xex4w1wmutygxs7jmht8ifry/A0FOB_H34%7BANLSY0OMDF%60BL.png">2</a></p>
+<p><img src="https://static.zybuluo.com/planeli/fnkeer255h5iubtuwvl1x1ht/2.png" alt="2.png-35.2kB"></p>
 <p>首先我们需要先解决权重文件的下载，我们进入官网(<a href="https://docs.ultralytics.com/quickstart/#install-ultralytics">https://docs.ultralytics.com/quickstart/#install-ultralytics</a>) 点击Models进入模型下载权重文件下载界面:</p>
 <p><img src="https://static.zybuluo.com/planeli/0zfgshonlqxihaup82k4hqhw/20241023212313.png" alt="20241023212313.png-114.3kB"></p>
 <p>再点击左侧的yolo11:</p>
 <p><img src="https://static.zybuluo.com/planeli/drdzcpotj40nt9m4jx296z31/image.png" alt="image.png-101.6kB"></p>
 <p>可以看到这里有五种不同的模型，分别对应五种不同的功能:</p>
-<p>![BC]~S9EPE[Q&#96;J9785XN1_72.png-92.3kB]<a href="https://static.zybuluo.com/planeli/roogapyx96skg895bt90ujgj/BC%5D~S9EPE%5BQ%60J9785XN1_72.png">5</a></p>
+<p><img src="https://static.zybuluo.com/planeli/gm0l1zcochxppmkkdapvl7fv/5.png" alt="5.png-92.3kB"></p>
 <p>这里我们选择第一个，也就是实现目标检测功能的模型</p>
 <p>YOLO11检测模型总共给了我们五个权重文件。各个权重文件精度由小到大，大小由小到大排列，这里我们只进行一个简单的测验，因此使用第一个,点名字即可下载:</p>
-<p>![5R3KG2G}O7S3AC6F@C&#96;A&#96;&#96;P.png-78.1kB]<a href="https://static.zybuluo.com/planeli/m2m2lz3xbu6ttnnb4bhs09nm/5R3KG2G%7DO7S3AC6F@C%60A%60%60P.png">6</a></p>
+<p><img src="https://static.zybuluo.com/planeli/oyxg73mtpbq6aw9bdgodv54n/6.png" alt="6.png-78.1kB"></p>
 <p>下载完后把文件放在我们刚才建的models文件夹下</p>
 <p>我们需要在yolp11文件夹下创建一个python的文件，命名为为demo.py:</p>
 <p><code>vi demo.py</code></p>
